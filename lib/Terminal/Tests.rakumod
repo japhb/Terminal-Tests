@@ -5,7 +5,7 @@ unit class Terminal::Tests;
 
 =head1 NAME
 
-Terminal::Tests - Terminal emulator and font quality and correctness tests
+Terminal::Tests - Terminal emulator, multiplexer, and font quality tests
 
 
 =head1 SYNOPSIS
@@ -57,9 +57,10 @@ correct, but again fails on the emoji row:
 L<Screenshot of quick test on Windows Terminal in UTF-8 mode|docs/images/quick-test-windows-terminal-utf8.png>
 
 Here it applies skin tones to the rightmost set, but still leaves extra room
-where the tone swatch I<would> be, thus once again causing the line to wrap --
-and this time also failing on the leftmost set of emoji faces, which should
-display in text outline mode as seen in the screenshot for C<gnome-terminal>.
+where the tone swatch I<would> be, thus once again causing the line to be too
+long -- and this time also failing on the leftmost set of emoji faces, which
+should display in text outline mode as seen in the screenshot for
+C<gnome-terminal>.
 
 However, Windows Terminal will only do that well under Windows 10 if "beta"
 UTF-8 support is turned on (see separate L<#Windows 10> section below).  Without
@@ -93,7 +94,7 @@ default system monospace scalable font using C<xterm -fa mono>:
 
 L<Screenshot of quick test running on xterm using the mono scalable font|docs/images/quick-test-xterm-mono.png>
 
-Scaling this up works better unsurprisingly (using C<xterm -fa mono -fs 12>):
+Unsurprisingly the scalable font scales up better (using C<xterm -fa mono -fs 12>):
 
 L<Screenshot of quick test running on xterm using the mono scalable font at 12-point size|docs/images/quick-test-xterm-mono-12.png>
 

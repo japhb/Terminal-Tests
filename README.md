@@ -3,7 +3,7 @@
 NAME
 ====
 
-Terminal::Tests - Terminal emulator and font quality and correctness tests
+Terminal::Tests - Terminal emulator, multiplexer, and font quality tests
 
 SYNOPSIS
 ========
@@ -36,7 +36,7 @@ The rightmost block of emoji should have skin tones applied, rather than shown i
 
 ![Screenshot of quick test on Windows Terminal in UTF-8 mode](docs/images/quick-test-windows-terminal-utf8.png)
 
-Here it applies skin tones to the rightmost set, but still leaves extra room where the tone swatch *would* be, thus once again causing the line to wrap -- and this time also failing on the leftmost set of emoji faces, which should display in text outline mode as seen in the screenshot for `gnome-terminal`.
+Here it applies skin tones to the rightmost set, but still leaves extra room where the tone swatch *would* be, thus once again causing the line to be too long -- and this time also failing on the leftmost set of emoji faces, which should display in text outline mode as seen in the screenshot for `gnome-terminal`.
 
 However, Windows Terminal will only do that well under Windows 10 if "beta" UTF-8 support is turned on (see separate [Windows 10](#Windows 10) section below). Without that, the test pattern will fall apart:
 
@@ -60,7 +60,7 @@ Using a scalable font will work better, even at the default small size, but emoj
 
 ![Screenshot of quick test running on xterm using the mono scalable font](docs/images/quick-test-xterm-mono.png)
 
-Scaling this up works better unsurprisingly (using `xterm -fa mono -fs 12`):
+Unsurprisingly the scalable font scales up better (using `xterm -fa mono -fs 12`):
 
 ![Screenshot of quick test running on xterm using the mono scalable font at 12-point size](docs/images/quick-test-xterm-mono-12.png)
 
