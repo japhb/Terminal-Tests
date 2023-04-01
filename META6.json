@@ -11,7 +11,7 @@
     "Terminal::ANSIColor",
     "Text::MiscUtils::Layout"
   ],
-  "description": "Terminal emulator and font quality and correctness tests",
+  "description": "Terminal emulator, multiplexer, and font quality tests",
   "license": "Artistic-2.0",
   "name": "Terminal::Tests",
   "perl": "6.d",
