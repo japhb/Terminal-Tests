@@ -1,0 +1,25 @@
+{
+  "auth": "zef:japhb",
+  "authors": [
+    "Geoffrey Broadwell"
+  ],
+  "build-depends": [
+  ],
+  "depends": [
+  ],
+  "description": "blah blah blah",
+  "license": "Artistic-2.0",
+  "name": "Terminal::Tests",
+  "perl": "6.d",
+  "provides": {
+    "Terminal::Tests": "lib/Terminal/Tests.rakumod"
+  },
+  "resources": [
+  ],
+  "source-url": "",
+  "tags": [
+  ],
+  "test-depends": [
+  ],
+  "version": "0.0.1"
+}

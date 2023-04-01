@@ -1,0 +1,6 @@
+use Test;
+use Terminal::Tests;
+
+pass "replace me";
+
+done-testing;
