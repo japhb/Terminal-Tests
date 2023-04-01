@@ -13,6 +13,7 @@
   "perl": "6.d",
   "provides": {
     "Terminal::Tests": "lib/Terminal/Tests.rakumod",
+    "Terminal::Tests::App::FullTest": "lib/Terminal/Tests/App/FullTest.rakumod",
     "Terminal::Tests::App::QuickTest": "lib/Terminal/Tests/App/QuickTest.rakumod"
   },
   "resources": [
