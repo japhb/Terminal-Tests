@@ -1,2 +1,13 @@
+# Caches
 .precomp/
+
+# Packages
+/sdist/
 /Terminal-Tests-*
+
+# Backup files
+*~
+
+# IDE files
+/.idea
+*.iml
