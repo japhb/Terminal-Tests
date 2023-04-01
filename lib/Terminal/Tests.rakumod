@@ -83,7 +83,7 @@ L<Screenshot of quick test running on xterm using the Unicode fixed font|docs/im
 
 Many of the symbols are nearly unreadable, and emoji aren't supported at all.
 Even worse, specifying a larger bitmap font size defaults to using the
-I<non-Unicode> version of the font, here launched with C<xterm -fs 10x20>:
+I<non-Unicode> version of the font, here launched with C<xterm -fn 10x20>:
 
 L<Screenshot of quick test running on xterm using the Latin-1 fixed font|docs/images/quick-test-xterm-fixed-latin1.png>
 
@@ -92,6 +92,10 @@ emoji are still completely unsupported; here I've just told C<xterm> to use the
 default system monospace scalable font using C<xterm -fa mono>:
 
 L<Screenshot of quick test running on xterm using the mono scalable font|docs/images/quick-test-xterm-mono.png>
+
+Scaling this up works better unsurprisingly (using C<xterm -fa mono -fs 12>):
+
+L<Screenshot of quick test running on xterm using the mono scalable font at 12-point size|docs/images/quick-test-xterm-mono-12.png>
 
 
 =head2 Full Terminal Test

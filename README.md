@@ -50,13 +50,17 @@ Finally, some problems are merely configuration or option issues. Here's xterm i
 
 [Screenshot of quick test running on xterm using the Unicode fixed font](docs/images/quick-test-xterm-fixed-unicode.png)
 
-Many of the symbols are nearly unreadable, and emoji aren't supported at all. Even worse, specifying a larger bitmap font size defaults to using the *non-Unicode* version of the font, here launched with `xterm -fs 10x20`:
+Many of the symbols are nearly unreadable, and emoji aren't supported at all. Even worse, specifying a larger bitmap font size defaults to using the *non-Unicode* version of the font, here launched with `xterm -fn 10x20`:
 
 [Screenshot of quick test running on xterm using the Latin-1 fixed font](docs/images/quick-test-xterm-fixed-latin1.png)
 
 Using a scalable font will work better, even at the default small size, but emoji are still completely unsupported; here I've just told `xterm` to use the default system monospace scalable font using `xterm -fa mono`:
 
 [Screenshot of quick test running on xterm using the mono scalable font](docs/images/quick-test-xterm-mono.png)
+
+Scaling this up works better unsurprisingly (using `xterm -fa mono -fs 12`):
+
+[Screenshot of quick test running on xterm using the mono scalable font at 12-point size](docs/images/quick-test-xterm-mono-12.png)
 
 Full Terminal Test
 ------------------
