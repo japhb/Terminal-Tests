@@ -6,6 +6,10 @@
   "build-depends": [
   ],
   "depends": [
+    "Hash::Ordered",
+    "JSON::Fast",
+    "Terminal::ANSIColor",
+    "Text::MiscUtils::Layout"
   ],
   "description": "Terminal emulator and font quality and correctness tests",
   "license": "Artistic-2.0",
