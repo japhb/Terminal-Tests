@@ -1,6 +1,11 @@
 use Test;
-use Terminal::Tests;
 
-pass "replace me";
+use Terminal::Tests;
+use Terminal::Tests::App::QuickTest Empty;
+use Terminal::Tests::App::FullTest  Empty;
+
+plan 1;
+
+pass "Modules loaded successfully";
 
 done-testing;
