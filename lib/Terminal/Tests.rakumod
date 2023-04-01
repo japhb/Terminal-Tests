@@ -89,12 +89,13 @@ I<non-Unicode> version of the font, here launched with C<xterm -fn 10x20>:
 L<Screenshot of quick test running on xterm using the Latin-1 fixed font|docs/images/quick-test-xterm-fixed-latin1.png>
 
 Using a scalable font will work better, even at the default small size, but
-emoji are still completely unsupported; here I've just told C<xterm> to use the
-default system monospace scalable font using C<xterm -fa mono>:
+color emoji are still unsupported (only text outlines are shown).  Here I've
+just told C<xterm> to use the default system monospace scalable font using
+C<xterm -fa mono>:
 
 L<Screenshot of quick test running on xterm using the mono scalable font|docs/images/quick-test-xterm-mono.png>
 
-Unsurprisingly the scalable font scales up better (using C<xterm -fa mono -fs 12>):
+Unsurprisingly the scalable font scales up better too (using C<xterm -fa mono -fs 12>):
 
 L<Screenshot of quick test running on xterm using the mono scalable font at 12-point size|docs/images/quick-test-xterm-mono-12.png>
 
