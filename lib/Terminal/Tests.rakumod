@@ -68,13 +68,15 @@ that, the test pattern will fall apart:
 
 L<Screenshot of quick test on Windows Terminal in UTF-16 mode|docs/images/quick-test-windows-terminal-default.png>
 
-Some failures are more subtle, affecting only one feature.  Here's an example
-of the pattern as seen inside of GNU Screen in a C<gnome-terminal>:
+Some failures are more subtle, affecting only one or two features.  Here's an
+example of the pattern as seen inside of GNU Screen in a C<gnome-terminal>:
 
 L<Screenshot of quick test running inside GNU Screen on gnome-terminal|docs/images/quick-test-gnome-terminal-gnu-screen.png>
 
-The degradation here is that Gnu Screen supports 4-bit and 8-bit ANSI color,
-but not 24-bit ANSI color, so the red/green/blue bars are missing.
+There are two degradations here.  The first is that GNU Screen supports 4-bit
+and 8-bit ANSI color, but not 24-bit ANSI color, so the red/green/blue bars in
+the top middle are missing.  The second is that GNU Screen has replaced the
+italic attribute with inverse at the top left.
 
 Finally, some problems are merely configuration or option issues.  Here's xterm
 in its default configuration on my system, using the low-res (but at least
