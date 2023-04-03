@@ -48,15 +48,15 @@ Some failures are more subtle, affecting only one or two features. Here's an exa
 
 There are two degradations here.  The first is that GNU Screen supports 4-bit and 8-bit ANSI color, but not 24-bit ANSI color, so the red/green/blue bars in the top middle are missing.  The second is that GNU Screen has replaced the italic attribute with inverse at the top left.
 
-Finally, some problems are merely configuration or option issues. Here's xterm in its default configuration on my system, using the low-res (but at least Unicode-capable) **bitmap** "fixed" font, launched with just `xterm`:
+Finally, some problems are merely configuration or option issues. Here's xterm in its default configuration on my system, using the low-res (but at least somewhat Unicode-capable) **bitmap** "fixed" font, launched with just `xterm`:
 
 ![Screenshot of quick test running on xterm using the Unicode fixed font](docs/images/quick-test-xterm-fixed-unicode.png)
 
-Many of the symbols are nearly unreadable, and emoji aren't supported at all. Even worse, specifying a larger bitmap font size defaults to using the *non-Unicode* version of the font, here launched with `xterm -fn 10x20`:
+Many of the symbols are nearly unreadable, many of the advanced drawing characters are missing, and emoji aren't supported at all. Even worse, specifying a larger bitmap font size defaults to using the *non-Unicode* version of the font, here launched with `xterm -fn 10x20`:
 
 ![Screenshot of quick test running on xterm using the Latin-1 fixed font](docs/images/quick-test-xterm-fixed-latin1.png)
 
-Using a scalable font will work better, even at the default small size, but color emoji are still unsupported (only text outlines are shown).  Here I've just told `xterm` to use the default system monospace scalable font using `xterm -fa mono`:
+Using a scalable font will work better, even at the default small size, but color emoji are still unsupported (only text outlines are shown), and many of the advanced drawing characters are misaligned or cut off.  Here I've just told `xterm` to use the default system monospace scalable font using `xterm -fa mono`:
 
 ![Screenshot of quick test running on xterm using the mono scalable font](docs/images/quick-test-xterm-mono.png)
 
