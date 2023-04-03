@@ -2,6 +2,10 @@ Revision history for Terminal-Tests
 
 {{$NEXT}}
 
+0.0.4  2023-04-03T13:30:33-07:00
+  - Added macOS 10.14 (Terminal) and 12.6 (Terminal and iTerm2) screenshots
+
+
 0.0.3  2023-04-03T11:22:33-07:00
   - Stricter META6 dependency versions
 
