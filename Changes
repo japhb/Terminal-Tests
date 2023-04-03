@@ -1,6 +1,8 @@
 Revision history for Terminal-Tests
 
 {{$NEXT}}
+  - Stricter META6 dependency versions
+
 
 0.0.2  2023-04-02T19:14:07-07:00
   - Initial version
