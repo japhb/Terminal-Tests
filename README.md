@@ -48,7 +48,21 @@ Some failures are more subtle, affecting only one or two features. Here's an exa
 
 There are two degradations here.  The first is that GNU Screen supports 4-bit and 8-bit ANSI color, but not 24-bit ANSI color, so the red/green/blue bars in the top middle are missing.  The second is that GNU Screen has replaced the italic attribute with inverse at the top left.
 
-Finally, some problems are merely configuration or option issues. Here's xterm in its default configuration on my system, using the low-res (but at least somewhat Unicode-capable) **bitmap** "fixed" font, launched with just `xterm`:
+Operating system and terminal software versions can make a significant difference.  For example, here's Terminal on macOS 10.14:
+
+![Screenshot of quick test running on Terminal on macOS 10.14](docs/images/quick-test-macOS10.14-Terminal.png)
+
+There's a massive improvement moving to Terminal on macOS 12.6:
+
+![Screenshot of quick test running on Terminal on macOS 12.6](docs/images/quick-test-macOS12.6-Terminal.png)
+
+And another overall quality improvement switching to iTerm2 on the same macOS version (12.6):
+
+![Screenshot of quick test running on iTerm2 on macOS 12.6](docs/images/quick-test-macOS12.6-iterm3.4.png)
+
+iTerm2 isn't purely an improvement over Terminal; there are a few minor degradations as well, such as shaded blocks being the wrong size, dashed lines being offset vertically, square corners being lengthened, and some text symbols gaining unrequested color.
+
+Finally, some problems are merely configuration or option issues. Here's xterm in its default configuration on my Linux system, using the low-res (but at least somewhat Unicode-capable) **bitmap** "fixed" font, launched with just `xterm`:
 
 ![Screenshot of quick test running on xterm using the Unicode fixed font](docs/images/quick-test-xterm-fixed-unicode.png)
 
