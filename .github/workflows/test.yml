@@ -18,8 +18,8 @@ jobs:
           # - windows-latest
         raku-version:
           - 'latest'
-          - '2022.02'
-          - '2021.02'
+          # - '2022.02'
+          # - '2021.02'
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v3
@@ -31,6 +31,6 @@ jobs:
       - name: Install Dependencies
         run: zef install --/test --test-depends --deps-only .
       - name: Install App::Prove6
-        run: zef install --/test "App::Prove6:ver<0.0.15>"
+        run: zef install --/test App::Prove6
       - name: Run Tests
         run: prove6 -l -v t
