@@ -415,7 +415,7 @@ sub show-wgl4-symbols() {
           * card suits: spade, club, heart, diamond; quavers: single, double
           * smiling faces: outline, solid; symbols: house, sun, female, male
         DESC
-    show('symbols', 'wgl4', "WGL Other", $desc, @rows);
+    show('symbols', 'wgl4', "WGL4 Other", $desc, @rows);
 }
 
 #| Math symbols from MES-2 ("Multilingual European Subset No. 2")
