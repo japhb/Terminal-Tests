@@ -68,6 +68,31 @@ sub MAIN(
     my $tones   = @people.map(&toneify).join(' ');
     my $faces   = '  ' ~ ($texts, $emoji, $tones).join('   ');
 
+    # Emoji flags
+    sub countrify($iso-code) {
+        $iso-code.uc.comb.map({ chr(ord($_) + 0x1F1A5) }).join
+    }
+    sub regionify($region) {
+        my $reg = $region.lc.subst('-', '').comb.map({ chr(ord($_) + 0xE0000) }).join;
+        '🏴' ~ $reg ~ "\xE007F"
+    }
+    sub zwj(*@chars) { @chars.join("\x200D") }
+
+    my $flags-base = < 🎌 🏁 🏳 🏳️ 🏴 🚩 >.join;
+    my $flags-iso  = < cn de es fr gb it jp kr ru us un >.map(&countrify).join;
+    my $flags-reg  = < GB-ENG GB-SCT GB-WLS US-CA US-TX >.map(&regionify).join;
+    my @flags-zwj  = zwj('🏳️', '🌈'), zwj('🏴', emojify('☠')), zwj('🏳️', emojify('⚧'));
+    my $flags-zwj  = @flags-zwj.join;
+    my $flags      = ('', $flags-base, $flags-iso, $flags-reg, $flags-zwj).join('  ');
+
+    # ZWJ people sequences, increasingly complex
+    my $farmer     = zwj('👨', '🌾');
+    my $surfer     = zwj('🏄', emojify('♀'));
+    my $couple     = zwj('👩', emojify('❤'), '👩');
+    my $kiss1      = zwj('👩', emojify('❤'), '💋', '👨');
+    my $kiss2      = zwj('🧑', emojify('❤'), '💋', '🧑');
+    my $people     = $surfer ~ $farmer ~ $couple ~ $kiss1 ~ $kiss2;
+
     # Box drawing glyphs
     my @boxes   =
         '╭┄╮  ╭╌╮  ┌─┐  ┏━┓  ╔═╗  ╭┈┬┈╮  ┌─┬─┐  ┏━┳━┓  ╔═╦═╗  ┏┯┳┯┓  ┏┯┳┯┓  ╔╤╦╤╗  ╔╤╦╤╗',
@@ -82,7 +107,8 @@ sub MAIN(
 
     # Combined output
     my @top     = ^4 .map: { @attrs[$_] ~ @colors[$_] ~ '  ' ~ @glyphs[$_] };
-    my @rows    = '', |@top, '', $misc, '', |@boxes, '', |@patterns, '', $faces, '';
+    my @rows    = '', |@top, '', $misc, '', |@boxes, '', |@patterns,
+                  '', $faces, '', $flags ~ '  ' ~ $people, '';
 
     .say for @rows;
     say horizontal-ruler if $ruler;
