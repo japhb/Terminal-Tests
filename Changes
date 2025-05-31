@@ -1,6 +1,8 @@
 Revision history for Terminal-Tests
 
 {{$NEXT}}
+
+0.0.5  2025-05-30T17:56:32-07:00
   - Add QuickTest support for flags and ZWJ emoji
   - Update screenshots for gnome-terminal, with and without GNU Screen
   - Update screenshots for xterm
