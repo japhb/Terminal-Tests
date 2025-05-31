@@ -131,11 +131,11 @@ the advanced drawing characters are misaligned or cut off.  Here I've just told
 C<xterm> to use the default system monospace scalable font using C<xterm -fa
 mono>:
 
-L<Screenshot of quick test running on xterm using the mono scalable font|docs/images/quick-test-xterm-mono.png>
+L<Screenshot of quick test running on xterm using the mono scalable font|docs/images/quick-test-xterm-mono-ruler.png>
 
 Unsurprisingly the scalable font scales up better too (using C<xterm -fa mono -fs 12>):
 
-L<Screenshot of quick test running on xterm using the mono scalable font at 12-point size|docs/images/quick-test-xterm-mono-12.png>
+L<Screenshot of quick test running on xterm using the mono scalable font at 12-point size|docs/images/quick-test-xterm-mono-12-ruler.png>
 
 
 =head2 Full Terminal Test

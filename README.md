@@ -80,11 +80,11 @@ Many of the symbols are nearly unreadable, many of the advanced drawing characte
 
 Using a scalable font will work better, even at the default small size, but color emoji are still unsupported (only text outlines are shown), and many of the advanced drawing characters are misaligned or cut off. Here I've just told `xterm` to use the default system monospace scalable font using `xterm -fa mono`:
 
-![Screenshot of quick test running on xterm using the mono scalable font](docs/images/quick-test-xterm-mono.png)
+![Screenshot of quick test running on xterm using the mono scalable font](docs/images/quick-test-xterm-mono-ruler.png)
 
 Unsurprisingly the scalable font scales up better too (using `xterm -fa mono -fs 12`):
 
-![Screenshot of quick test running on xterm using the mono scalable font at 12-point size](docs/images/quick-test-xterm-mono-12.png)
+![Screenshot of quick test running on xterm using the mono scalable font at 12-point size](docs/images/quick-test-xterm-mono-12-ruler.png)
 
 Full Terminal Test
 ------------------
