@@ -64,9 +64,9 @@ There's a massive improvement moving to Terminal on macOS 12.6:
 
 ![Screenshot of quick test running on Terminal on macOS 12.6](docs/images/quick-test-macOS12.6-Terminal.png)
 
-And another overall quality improvement switching to iTerm2 on the same macOS version (12.6):
+And another overall quality improvement switching to iTerm2 on macOS:
 
-![Screenshot of quick test running on iTerm2 on macOS 12.6](docs/images/quick-test-macOS12.6-iterm3.4.png)
+![Screenshot of quick test running on iTerm2 on macOS](docs/images/quick-test-macOS-iterm2.png)
 
 iTerm2 isn't purely an improvement over Terminal; there are a few minor degradations as well, such as shaded blocks being the wrong size, dashed lines being offset vertically, square corners being lengthened, and some text symbols gaining unrequested color.
 
