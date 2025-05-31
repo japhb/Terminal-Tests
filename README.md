@@ -52,9 +52,9 @@ However, Windows Terminal will only do that well under Windows 10 if "beta" UTF-
 
 Some failures are more subtle, affecting only one or two features. Here's an example of the pattern as seen inside of GNU Screen in a `gnome-terminal`:
 
-![Screenshot of quick test running inside GNU Screen on gnome-terminal](docs/images/quick-test-gnome-terminal-gnu-screen.png)
+![Screenshot of quick test running inside GNU Screen on gnome-terminal](docs/images/quick-test-gnome-terminal-gnu-screen-ruler.png)
 
-There are two degradations here. The first is that GNU Screen supports 4-bit and 8-bit ANSI color, but not 24-bit ANSI color, so the red/green/blue bars in the top middle are missing. The second is that GNU Screen has replaced the italic attribute with inverse at the top left.
+There are two new degradations here. The first is that GNU Screen supports 4-bit and 8-bit ANSI color, but not 24-bit ANSI color, so the red/green/blue bars in the top middle are missing. The second is that GNU Screen has replaced the italic attribute with inverse at the top left.
 
 Operating system and terminal software versions can make a significant difference. For example, here's Terminal on macOS 10.14:
 

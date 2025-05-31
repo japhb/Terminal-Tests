@@ -2,7 +2,7 @@ Revision history for Terminal-Tests
 
 {{$NEXT}}
   - Add QuickTest support for flags and ZWJ emoji
-  - Update screenshot for gnome-terminal (and include ruler)
+  - Update screenshots for gnome-terminal, with and without GNU Screen
   - Add screenshot for kitty with ruler
   - Update README to discuss above screenshots
 
