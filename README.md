@@ -28,11 +28,19 @@ Quick Test Pattern
 
 To display the quick test program, simply run `terminal-quick-test`; you can add the `--ruler` option if you'd like to also display a screen width ruler to help detect misalignment. *Correct* output should be no more than 79 columns on any line, so you've likely run into a terminal bug if the displayed test pattern is wider than that.
 
-At the time of writing, I've not yet seen any terminals show a perfect test pattern; the best results so far get everything except the emoji row correct. For reference, here's what the pattern looks like on a default `gnome-terminal` in Ubuntu 22.04 LTS or Linux Mint 21.x (based on that same Ubuntu LTS release):
+At the time of writing, I've not yet seen any terminals show a perfect test pattern; the best results so far get everything except the emoji rows correct. For reference, here's what the pattern looks like on a default `gnome-terminal` in Ubuntu 22.04 LTS or Linux Mint 21.x (based on that same Ubuntu LTS release):
 
-![Screenshot of quick test on default gnome-terminal](docs/images/quick-test-gnome-terminal.png)
+![Screenshot of quick test on default gnome-terminal with ruler](docs/images/quick-test-gnome-terminal-ruler.png)
 
-The rightmost block of emoji should have skin tones applied, rather than shown in fallback mode as a tone swatch next to a yellow emoji, causing the line to overflow. Windows Terminal in Windows 10 similarly gets most of the pattern correct, but again fails on the emoji row:
+The rightmost block of face emoji should have skin tones applied, rather than shown in fallback mode as a tone swatch next to a yellow emoji, causing the line to overflow. Likewise, flags for ISO country codes are unsupported, while oddly region-coded flags are, and joined emoji (using ZWJ, the zero-width joiner) don't actually join.
+
+Kitty does much better with emoji and handles facial skin tones properly. While country flags are supported, region flags aren't. Joined emoji are supported, though the spacing is increasingly off as they get more complex, and some joined emoji sequences don't join properly:
+
+![Screenshot of quick test on Kitty with ruler](docs/images/quick-test-kitty-ruler.png)
+
+While this is overall quite good, there are minor artifacts here and there: no bright bar on the basic colors, window frames that don't quite align, and slight shifting in a couple places on the corners, boxes, and compasses row.
+
+Windows Terminal in Windows 10 similarly gets most of the pattern correct, but again fails on the emoji row:
 
 ![Screenshot of quick test on Windows Terminal in UTF-8 mode](docs/images/quick-test-windows-terminal-utf8.png)
 
@@ -46,9 +54,9 @@ Some failures are more subtle, affecting only one or two features. Here's an exa
 
 ![Screenshot of quick test running inside GNU Screen on gnome-terminal](docs/images/quick-test-gnome-terminal-gnu-screen.png)
 
-There are two degradations here.  The first is that GNU Screen supports 4-bit and 8-bit ANSI color, but not 24-bit ANSI color, so the red/green/blue bars in the top middle are missing.  The second is that GNU Screen has replaced the italic attribute with inverse at the top left.
+There are two degradations here. The first is that GNU Screen supports 4-bit and 8-bit ANSI color, but not 24-bit ANSI color, so the red/green/blue bars in the top middle are missing. The second is that GNU Screen has replaced the italic attribute with inverse at the top left.
 
-Operating system and terminal software versions can make a significant difference.  For example, here's Terminal on macOS 10.14:
+Operating system and terminal software versions can make a significant difference. For example, here's Terminal on macOS 10.14:
 
 ![Screenshot of quick test running on Terminal on macOS 10.14](docs/images/quick-test-macOS10.14-Terminal.png)
 
@@ -70,7 +78,7 @@ Many of the symbols are nearly unreadable, many of the advanced drawing characte
 
 ![Screenshot of quick test running on xterm using the Latin-1 fixed font](docs/images/quick-test-xterm-fixed-latin1.png)
 
-Using a scalable font will work better, even at the default small size, but color emoji are still unsupported (only text outlines are shown), and many of the advanced drawing characters are misaligned or cut off.  Here I've just told `xterm` to use the default system monospace scalable font using `xterm -fa mono`:
+Using a scalable font will work better, even at the default small size, but color emoji are still unsupported (only text outlines are shown), and many of the advanced drawing characters are misaligned or cut off. Here I've just told `xterm` to use the default system monospace scalable font using `xterm -fa mono`:
 
 ![Screenshot of quick test running on xterm using the mono scalable font](docs/images/quick-test-xterm-mono.png)
 
@@ -98,6 +106,6 @@ Geoffrey Broadwell <gjb@sonic.net>
 COPYRIGHT AND LICENSE
 =====================
 
-Copyright © 2022-2023 Geoffrey Broadwell
+Copyright © 2022-2025 Geoffrey Broadwell
 
 This library is free software; you can redistribute it and/or modify it under the Artistic License 2.0.

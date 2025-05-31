@@ -42,16 +42,31 @@ columns on any line, so you've likely run into a terminal bug if the displayed
 test pattern is wider than that.
 
 At the time of writing, I've not yet seen any terminals show a perfect test
-pattern; the best results so far get everything except the emoji row correct.
+pattern; the best results so far get everything except the emoji rows correct.
 For reference, here's what the pattern looks like on a default
 C<gnome-terminal> in Ubuntu 22.04 LTS or Linux Mint 21.x (based on that same
 Ubuntu LTS release):
 
-L<Screenshot of quick test on default gnome-terminal|docs/images/quick-test-gnome-terminal.png>
+L<Screenshot of quick test on default gnome-terminal with ruler|docs/images/quick-test-gnome-terminal-ruler.png>
 
-The rightmost block of emoji should have skin tones applied, rather than shown
-in fallback mode as a tone swatch next to a yellow emoji, causing the line to
-overflow.  Windows Terminal in Windows 10 similarly gets most of the pattern
+The rightmost block of face emoji should have skin tones applied, rather than
+shown in fallback mode as a tone swatch next to a yellow emoji, causing the
+line to overflow.  Likewise, flags for ISO country codes are unsupported, while
+oddly region-coded flags are, and joined emoji (using ZWJ, the zero-width
+joiner) don't actually join.
+
+Kitty does much better with emoji and handles facial skin tones properly.
+While country flags are supported, region flags aren't.  Joined emoji are
+supported, though the spacing is increasingly off as they get more complex,
+and some joined emoji sequences don't join properly:
+
+L<Screenshot of quick test on Kitty with ruler|docs/images/quick-test-kitty-ruler.png>
+
+While this is overall quite good, there are minor artifacts here and there:
+no bright bar on the basic colors, window frames that don't quite align, and
+slight shifting in a couple places on the corners, boxes, and compasses row.
+
+Windows Terminal in Windows 10 similarly gets most of the pattern
 correct, but again fails on the emoji row:
 
 L<Screenshot of quick test on Windows Terminal in UTF-8 mode|docs/images/quick-test-windows-terminal-utf8.png>
@@ -151,7 +166,7 @@ Geoffrey Broadwell <gjb@sonic.net>
 
 =head1 COPYRIGHT AND LICENSE
 
-Copyright © 2022-2023 Geoffrey Broadwell
+Copyright © 2022-2025 Geoffrey Broadwell
 
 This library is free software; you can redistribute it and/or modify it under
 the Artistic License 2.0.

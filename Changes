@@ -1,6 +1,11 @@
 Revision history for Terminal-Tests
 
 {{$NEXT}}
+  - Add QuickTest support for flags and ZWJ emoji
+  - Update screenshot for gnome-terminal (and include ruler)
+  - Add screenshot for kitty with ruler
+  - Update README to discuss above screenshots
+
 
 0.0.4  2023-04-03T13:30:33-07:00
   - Added macOS 10.14 (Terminal) and 12.6 (Terminal and iTerm2) screenshots
