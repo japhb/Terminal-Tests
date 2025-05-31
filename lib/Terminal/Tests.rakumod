@@ -116,14 +116,14 @@ Finally, some problems are merely configuration or option issues.  Here's xterm
 in its default configuration on my Linux system, using the low-res (but at least
 somewhat Unicode-capable) B<bitmap> "fixed" font, launched with just C<xterm>:
 
-L<Screenshot of quick test running on xterm using the Unicode fixed font|docs/images/quick-test-xterm-fixed-unicode.png>
+L<Screenshot of quick test running on xterm using the Unicode fixed font|docs/images/quick-test-xterm-fixed-unicode-ruler.png>
 
 Many of the symbols are nearly unreadable, many of the advanced drawing
 characters are missing, and emoji aren't supported at all.  Even worse,
 specifying a larger bitmap font size defaults to using the I<non-Unicode>
 version of the font, here launched with C<xterm -fn 10x20>:
 
-L<Screenshot of quick test running on xterm using the Latin-1 fixed font|docs/images/quick-test-xterm-fixed-latin1.png>
+L<Screenshot of quick test running on xterm using the Latin-1 fixed font|docs/images/quick-test-xterm-fixed-latin1-ruler.png>
 
 Using a scalable font will work better, even at the default small size, but
 color emoji are still unsupported (only text outlines are shown), and many of
