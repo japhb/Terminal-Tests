@@ -10,12 +10,14 @@ sub MAIN(
 ) is export {
     # Simple ANSI attributes
     my @basic  = < bold italic inverse underline >;
-    my @attrs  = @basic.map: { colored($_, $_) ~ (' ' x 11 - .chars) };
+    my @attrs  = @basic.map: { colored($_, $_) ~ (' ' x 10 - .chars) };
 
     # 4-bit palette colors
     my @palette = < black red green yellow blue magenta cyan white >;
-    my $regular = @palette.map({ colored '  ', "inverse $_" }).join;
-    my $bold    = @palette.map({ colored '  ', "bold inverse $_" }).join;
+    my $regular = @palette.map({ colored '██', $_ }).join;
+    my $reg-bg  = @palette.map({ colored '██', "inverse on_$_" }).join;
+    my $bold    = @palette.map({ colored '██', "bold $_" }).join;
+    my $bold-bg = @palette.map({ colored '██', "bold inverse on_$_" }).join;
 
     # 8-bit greyscale
     my $grey    = (^24).map({ colored ' ', 'on_' ~ (232 + $_) }).join;
@@ -29,33 +31,38 @@ sub MAIN(
                               colored ' ', "on_0,0,$s" }).join;
 
     # Combined color bars
-    my @colors  = $regular ~ '  ' ~ $red,
-                  $regular ~ '  ' ~ $green,
-                  $bold    ~ '  ' ~ $blue,
-                  $regular ~ '  ' ~ $grey;
+    my @colors  = $regular ~ ' ' ~ $red,
+                  $reg-bg  ~ ' ' ~ $green,
+                  $bold    ~ ' ' ~ $blue,
+                  $bold-bg ~ ' ' ~ $grey;
 
     # Glyph repertoires
-    my $latin1  = < £ ¥ « » ¡ ¿ µ ¶ × ÷ § © ® ° ± · ¹ ² ³ ¼ ½ ¾ >.join;
-    my $cp1252  = < • … € ƒ ‹ › † ‡ ™ ‰ ‘ ’ “ ” ‚ „ >.join;
-    my $w1g     = < ′ ″ ⅛ ⅜ ⅝ ⅞ ∆ ∂ ∞ ∑ ∏ ∫ ≈ ≠ ≤ ≥ √ ⁿ >.join;
-    my $wgl4    = < ← ↑ → ↓ ↔ ↕ ○ ● □ ■ ▫ ▪ ▲ ▼ ◄ ► ♠ ♣ ♥ ♦ ♪ ♫ ☺ ☻ ⌂ ☼ ♀ ♂ >.join;
-    my $mes2    = < ∀ ∃ ∧ ∨ ⊕ ⊗ ∩ ∪ ⊂ ⊃ ∈ ∉ >.join;
-    my $all     = ($latin1, $cp1252, $w1g, $wgl4, $mes2).join;
-    my @glyphs  = $all.comb.rotor(24, :partial).map(*.join);
+    my $latin1  = < « » £ ¥ ¡ ¿ µ ¶ § © ® ° × ÷ ± · ¹ ² ³ ¼ ½ ¾ >.join;
+    my $cp1252  = < ‰ † ‡ • … ‹ › € ƒ ™ ‘ ’ “ ” ‚ „ >.join;
+    my $w1g     = < ′ ″ ⁿ ∂ ∆ ∑ ∏ ∫ ⅛ ⅜ ⅝ ⅞ √ ≠ ≤ ≥ ∞ ≈ >.join;
+    my $wgl4    = < ↔ ↕ ○ ● □ ■ ▫ ▪ ▬ ⌂ ♪ ♫ ☺ ☻ ♀ ♂ ☼ ♠ ♣ ♥ ♦ >.join;
+    my $mes2    = < ∀ ∃ ∧ ∨ ⊕ ⊗ ∩ ∪ ⊂ ⊃ ∈ ∉ 〈 〉 >.join;
+    my $uni1    = < ˥ ˦ ˧ ˨ ˩ ⅓ ⅔ ⅕ ⅖ ⅗ ⅘ ⅙ ⅚ ✔ ✘ >.join;
+    my $all     = ($latin1, $cp1252, $w1g, $wgl4, $mes2, $uni1).join;
+    my @glyphs  = $all.comb.rotor(27, :partial).map(*.join);
 
     # Block drawing glyphs
     my $vbars   = '▁▂▃▄▅▆▇█';
     my $hbars   = '▉▊▋▌▍▎▏';
     my $checker = '▀▄';
-    my $shades  = '██  ▓▓  ▒▒  ░░';
-    my $blocks  = "$vbars  $hbars $checker  $shades";
+    my $shades  = '██ ▓▓ ▒▒ ░░';
+    my $blocks  = "$vbars $hbars $checker $shades";
 
-    # Misc symbols
-    my $tbars   = '˥ ˦ ˧ ˨ ˩';
-    my $sarrows = '→ ↗ ↑ ↖ ← ↙ ↓ ↘';
-    my $darrows = '⇒ ⇗ ⇑ ⇖ ⇐ ⇙ ⇓ ⇘';
-    my $symbols = "$tbars $sarrows $darrows";
-    my $misc    = "$blocks  $symbols";
+    # Arrows
+    my $sarrows = < → ↗ ↑ ↖ ← ↙ ↓ ↘ >.join;
+    my $darrows = < ⇒ ⇗ ⇑ ⇖ ⇐ ⇙ ⇓ ⇘ >.join;
+    my $blarrow = < ➡ ⬈ ⬆ ⬉ ⬅ ⬋ ⬇ ⬊ >.join;
+    my $warrows = < ⇨ ⇧ ⇦ ⇩ >.join;
+    my $barrows = < ↦ ↥ ↤ ↧ >.join;
+    my $parrows = < ⇉ ⇈ ⇇ ⇊ >.join;
+    my $harrows = < 🡆 🡅 🡄 🡇 >.join;
+    my $arrows  = ($sarrows, $darrows, $blarrow, $warrows,
+                   $barrows, $parrows, $harrows).join(' ');
 
     # Text and color emoji
     sub textify($char) { $char ~ "\x[FE0E]"  }
@@ -63,10 +70,10 @@ sub MAIN(
     sub toneify($char) { $char ~ "\x[1F3FF]" }
     my @faces   = < 😵 😲 😍 😠 😑 🤐 🤮 >;
     my @people  = < 👶 🧒 👦 👧 🧑 👨 👩 🧓 👴 👵 >;
-    my $texts   = @faces.map(&textify).join(' ');
-    my $emoji   = @faces.map(&emojify).join(' ');
-    my $tones   = @people.map(&toneify).join(' ');
-    my $faces   = '  ' ~ ($texts, $emoji, $tones).join('   ');
+    my $texts   = @faces.map(&textify).map(* ~ ' ').join;
+    my $emoji   = @faces.map(&emojify).join;
+    my $tones   = @people.map(&toneify).join;
+    my $faces   = ($texts, $emoji, $tones).join('  ');
 
     # Emoji flags
     sub countrify($iso-code) {
@@ -78,12 +85,12 @@ sub MAIN(
     }
     sub zwj(*@chars) { @chars.join("\x200D") }
 
-    my $flags-base = < 🎌 🏁 🏳 🏳️ 🏴 🚩 >.join;
+    my $flags-base = < 🏳 🏳️ 🏴 🏁 🚩 🎌 >.join;
     my $flags-iso  = < cn de es fr gb it jp kr ru us un >.map(&countrify).join;
     my $flags-reg  = < GB-ENG GB-SCT GB-WLS US-CA US-TX >.map(&regionify).join;
     my @flags-zwj  = zwj('🏳️', '🌈'), zwj('🏴', emojify('☠')), zwj('🏳️', emojify('⚧'));
     my $flags-zwj  = @flags-zwj.join;
-    my $flags      = ('', $flags-base, $flags-iso, $flags-reg, $flags-zwj).join('  ');
+    my $flags      = ($flags-base, $flags-iso, $flags-reg, $flags-zwj).join(' ');
 
     # ZWJ people sequences, increasingly complex
     my $farmer     = zwj('👨', '🌾');
@@ -94,21 +101,27 @@ sub MAIN(
     my $people     = $surfer ~ $farmer ~ $couple ~ $kiss1 ~ $kiss2;
 
     # Box drawing glyphs
-    my @boxes   =
-        '╭┄╮  ╭╌╮  ┌─┐  ┏━┓  ╔═╗  ╭┈┬┈╮  ┌─┬─┐  ┏━┳━┓  ╔═╦═╗  ┏┯┳┯┓  ┏┯┳┯┓  ╔╤╦╤╗  ╔╤╦╤╗',
-        '┊ ┊  ╎ ╎  │ │  ┃ ┃  ║ ║  ├┈┼┈┤  ├─┼─┤  ┣━╋━┫  ╠═╬═╣  ┠┼╂┼┨  ┣┿╋┿┫  ╟┼╫┼╢  ╠╪╬╪╣',
-        '╰┄╯  ╰╌╯  └─┘  ┗━┛  ╚═╝  ╰┈┴┈╯  └─┴─┘  ┗━┻━┛  ╚═╩═╝  ┗┷┻┷┛  ┗┷┻┷┛  ╚╧╩╧╝  ╚╧╩╧╝';
+    my @boxes =
+        '╭┄╮ ╭╌╮ ┌─┐ ┏━┓ ╔═╗ ╭┈┬┈╮ ┌─┬─┐ ┏━┳━┓ ╔═╦═╗ ┏┯┳┯┓ ╔╤╦╤╗ ╔╤╦╤╗',
+        '┊ ┊ ╎ ╎ │ │ ┃ ┃ ║ ║ ├┈┼┈┤ ├─┼─┤ ┣━╋━┫ ╠═╬═╣ ┣┿╋┿┫ ╟┼╫┼╢ ╠╪╬╪╣',
+        '╰┄╯ ╰╌╯ └─┘ ┗━┛ ╚═╝ ╰┈┴┈╯ └─┴─┘ ┗━┻━┛ ╚═╩═╝ ┗┷┻┷┛ ╚╧╩╧╝ ╚╧╩╧╝';
+
+    # Compass roses
+    my @compasses =
+        '   ▲     ⮝   ◸ ▲ ◹',
+        ' ◄ ● ► ⮜ 🟑 ⮞ ◀ ✵ ▶',
+        '   ▼     ⮟   ◺ ▼ ◿';
 
     # Patterns
     my @patterns =
-        '⌌ ⌍  ◜ ◝  ⌜ ⌝  ◲ ◱  ◶ ◵   🬚🬓  █▀█  █🮑█  ▛▀▜  🬕🬂🬨  🬆 🬊  🭽▔🭾    ▲      ⮝    ◸ ▲ ◹',
-        '⌎ ⌏  ◟ ◞  ⌞ ⌟  ◳ ◰  ◷ ◴   🬂🬀  ▀▀▀  ▀▀▀  ▙▄▟  🬲🬭🬷  🬱 🬵  🭼▁🭿  ◄ ● ►  ⮜ 🟑 ⮞  ◀ ✵ ▶',
-        '                                                              ▼      ⮟    ◺ ▼ ◿';
+        '⌌ ⌍ ◜ ◝ ⌜ ⌝ ◲ ◱ ◶ ◵  🬚🬓 █▀█ █🮑█ ▛▀▜ 🬕🬂🬨 🬆 🬊 🭽▔🭾',
+        '⌎ ⌏ ◟ ◞ ⌞ ⌟ ◳ ◰ ◷ ◴  🬂🬀 ▀▀▀ ▀▀▀ ▙▄▟ 🬲🬭🬷 🬱 🬵 🭼▁🭿';
 
     # Combined output
-    my @top     = ^4 .map: { @attrs[$_] ~ @colors[$_] ~ '  ' ~ @glyphs[$_] };
-    my @rows    = '', |@top, '', $misc, '', |@boxes, '', |@patterns,
-                  '', $faces, '', $flags ~ '  ' ~ $people, '';
+    my @top     = ^4 .map: { @attrs[$_] ~ @colors[$_] ~ ' ' ~ @glyphs[$_] };
+    my @rows    = '', |@top, '', $blocks ~ '  ' ~ $arrows,
+                  |(@boxes Z~ @compasses), |@patterns, '',
+                  $faces, $flags, $people;
 
     .say for @rows;
     say horizontal-ruler if $ruler;
