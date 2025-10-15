@@ -46,6 +46,24 @@ sub MAIN(
     my $all     = ($latin1, $cp1252, $w1g, $wgl4, $mes2, $uni1).join;
     my @glyphs  = $all.comb.rotor(27, :partial).map(*.join);
 
+    # Game piece glyphs
+    my $suits    = < ♠ ♣ ♥ ♦ ♤ ♧ ♡ ♢ >.join;                         # WGL4, Unicode 1.1
+    my $chess    = (^12).map({ chr(0x2654 + $_) }).join;             # Unicode 1.1
+    my $dice     = < ⚀ ⚁ ⚂ ⚃ ⚄ ⚅ >.join;                             # Unicode 3.2
+    my $shogi    = < ☖ ☗ ⛉ ⛊ >.join;                                 # Unicode 3.2, 5.2
+    my $draughts = < ⛀ ⛁ ⛂ ⛃ >.join;                                 # Unicode 5.1
+    my $hdomino  = (^4).map({ chr(0x1F030 + 13 * $_) ~ ' ' }).join;  # Unicode 5.1
+    my $vdomino  = (^4).map({ chr(0x1F062 + 13 * $_) }).join;        # Unicode 5.1
+    my $mahjong  = (flat 0x1F007, 0x1F010, 0x1F019,
+                    0x1F022 .. 0x1F02B).map({ .chr ~ ' '}).join;     # Unicode 5.1
+    my $hearts   = (0x1F0B1 .. 0x1F0BE).map({ .chr ~ ' '}).join;     # Unicode 6.0
+    my $trumps   = (flat 0x1F0F0 .. 0x1F0F3, 0x1F0E6 .. 0x1F0E9,
+                    0x1F0E1, 0x1F0F5).map({ .chr ~ ' '}).join;       # Unicode 7.0
+    my $xiangqi  = (0x1FA60 .. 0x1FA6D).map({ .chr ~ ' '}).join;     # Unicode 11.0
+    my @games    = ($suits, $chess, $dice, $shogi, $draughts,
+                    $hdomino ~ $vdomino, ' ' ~ $mahjong).join(' '),
+                   ($hearts, ' ' ~ $trumps, $xiangqi).join(' ');
+
     # Block drawing glyphs
     my $vbars   = '▁▂▃▄▅▆▇█';
     my $hbars   = '▉▊▋▌▍▎▏';
@@ -131,7 +149,7 @@ sub MAIN(
 
     # Combined output
     my @top     = ^4 .map: { @attrs[$_] ~ @colors[$_] ~ ' ' ~ @glyphs[$_] };
-    my @rows    = '', |@top, '', $blocks ~ '  ' ~ $arrows,
+    my @rows    = '', |@top, |@games, $blocks ~ '  ' ~ $arrows,
                   |(@boxes Z~ @compasses), |((|@patterns, ' ' x 46) Z~ @sub-cells),
                   $faces, $flags, $people;
 
