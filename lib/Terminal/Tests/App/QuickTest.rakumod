@@ -46,6 +46,10 @@ sub MAIN(
     my $all     = ($latin1, $cp1252, $w1g, $wgl4, $mes2, $uni1).join;
     my @glyphs  = $all.comb.rotor(27, :partial).map(*.join);
 
+    # Superscripts and subscripts
+    my $sub     = (0x2080 .. 0x208E).map(&chr).join;
+    my $super   = (flat < ⁰ ¹ ² ³ >, (0x2074 .. 0x207E).map(&chr)).join;
+
     # Game piece glyphs
     my $suits    = < ♠ ♣ ♥ ♦ ♤ ♧ ♡ ♢ >.join;                         # WGL4, Unicode 1.1
     my $chess    = (^12).map({ chr(0x2654 + $_) }).join;             # Unicode 1.1
@@ -61,26 +65,35 @@ sub MAIN(
                     0x1F0E1, 0x1F0F5).map({ .chr ~ ' '}).join;       # Unicode 7.0
     my $xiangqi  = (0x1FA60 .. 0x1FA6D).map({ .chr ~ ' '}).join;     # Unicode 11.0
     my @games    = ($suits, $chess, $dice, $shogi, $draughts,
-                    $hdomino ~ $vdomino, ' ' ~ $mahjong).join(' '),
-                   ($hearts, ' ' ~ $trumps, $xiangqi).join(' ');
+                    $hdomino ~ $vdomino, $mahjong).join(' '),
+                   ($hearts, $trumps, $xiangqi).join(' ');
 
     # Block drawing glyphs
-    my $vbars   = '▁▂▃▄▅▆▇█';
-    my $hbars   = '▉▊▋▌▍▎▏';
-    my $checker = '▀▄';
-    my $shades  = '██ ▓▓ ▒▒ ░░';
-    my $blocks  = "$vbars $hbars $checker $shades";
+    my $lo-vbars = '▁▂▃▄▅▆▇█';
+    my $hi-vbars = '▔🮂🮃▀🮄🮅🮆█';
+    my $l-hbars  = '▉▊▋▌▍▎▏';
+    my $r-hbars  = '▕🮇🮈▐🮉🮊🮋';
+    my $h-lines  = '▔🭶🭷🭸🭹🭺🭻▁';
+    my $v-lines  = '▏🭰🭱🭲🭳🭴🭵▕';          # Doesn't display well horizontally
+    my @vertical = < ▏ 🭰 🭱 🭲 🭳 🭴 🭵 ▕ >;  # Same set, broken into 8 lines
+    my $checker  = '▀▄ 🙿  🮕🮕';
+    my $shades   = '██▓▓▒▒░░';
+    my $squares  = '◧◨◩◪⬒⬓⬕⬔';
+    my $fills    = (0x25A4 .. 0x25A9).map(&chr).join;
+    my @blocks   = "$lo-vbars $l-hbars $checker $shades",
+                   "$hi-vbars $r-hbars $h-lines $squares";
 
     # Arrows
     my $sarrows = < → ↗ ↑ ↖ ← ↙ ↓ ↘ >.join;
     my $darrows = < ⇒ ⇗ ⇑ ⇖ ⇐ ⇙ ⇓ ⇘ >.join;
     my $blarrow = < ➡ ⬈ ⬆ ⬉ ⬅ ⬋ ⬇ ⬊ >.join;
+    my $carrows = < ↺ ↻ ⟲ ⟳ ⭯ ⭮ >.join;
     my $warrows = < ⇨ ⇧ ⇦ ⇩ >.join;
     my $barrows = < ↦ ↥ ↤ ↧ >.join;
     my $parrows = < ⇉ ⇈ ⇇ ⇊ >.join;
     my $harrows = < 🡆 🡅 🡄 🡇 >.join;
-    my $arrows  = ($sarrows, $darrows, $blarrow, $warrows,
-                   $barrows, $parrows, $harrows).join(' ');
+    my @arrows  = ($sarrows, $darrows, $blarrow).join(' '),
+                  ($carrows, $warrows, $barrows, $parrows, $harrows).join(' ');
 
     # Sub-cell "pixel" glyphs
     my $quadrants = < ▘ ▝ ▀ ▖ ▌ ▞ ▛ ▗ ▚ ▐ ▜ ▄ ▙ ▟ █ >.join;
@@ -138,9 +151,9 @@ sub MAIN(
 
     # Compass roses
     my @compasses =
-        '  ╷   ╻  ╲╿╱   ▲    ⮝   ◸ ▲ ◹',
-        ' ─○─ ━🞉━ ╾╳╼ ◄ ● ►⮜ 🟑 ⮞ ◀ ✵ ▶',
-        '  ╵   ╹  ╱╽╲   ▼    ⮟   ◺ ▼ ◿';
+        ' ╷   ╻  ╲╿╱   ▲    ⮝   ◸ ▲ ◹',
+        '─○─ ━🞉━ ╾╳╼ ◄ ● ►⮜ 🟑 ⮞ ◀ ✵ ▶',
+        ' ╵   ╹  ╱╽╲   ▼    ⮟   ◺ ▼ ◿';
 
     # Patterns
     my @patterns =
@@ -149,8 +162,12 @@ sub MAIN(
 
     # Combined output
     my @top     = ^4 .map: { @attrs[$_] ~ @colors[$_] ~ ' ' ~ @glyphs[$_] };
-    my @rows    = '', |@top, |@games, $blocks ~ '  ' ~ $arrows,
-                  |(@boxes Z~ @compasses), |((|@patterns, ' ' x 46) Z~ @sub-cells),
+    my @rows    = |@top, '',
+                  |(@vertical Z~ (|@games, '', |(@blocks Z~
+                                                 ('  ' ~ $sub   ~ ' ' ~ @arrows[0],
+                                                  '  ' ~ $super ~ ' ' ~ @arrows[1])),
+                                  |(@boxes Z~ @compasses))),
+                  |((|@patterns, ' ' x 46) Z~ @sub-cells),
                   $faces, $flags, $people;
 
     .say for @rows;
