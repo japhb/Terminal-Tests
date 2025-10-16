@@ -1,6 +1,8 @@
 Revision history for Terminal-Tests
 
 {{$NEXT}}
+
+0.0.6  2025-10-16T00:35:12-07:00
   [Features]
   - Greatly expand terminal feature tests in terminal-quick-test pattern
 
