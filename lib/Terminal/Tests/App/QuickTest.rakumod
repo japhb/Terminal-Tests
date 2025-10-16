@@ -37,14 +37,15 @@ sub MAIN(
                   $bold-bg ~ ' ' ~ $grey;
 
     # Glyph repertoires
-    my $latin1  = < « » £ ¥ ¡ ¿ µ ¶ § © ® ° × ÷ ± · ¹ ² ³ ¼ ½ ¾ >.join;
-    my $cp1252  = < ‰ † ‡ • … ‹ › € ƒ ™ ‘ ’ “ ” ‚ „ >.join;
-    my $w1g     = < ′ ″ ⁿ ∂ ∆ ∑ ∏ ∫ ⅛ ⅜ ⅝ ⅞ √ ≠ ≤ ≥ ∞ ≈ >.join;
-    my $wgl4    = < ↔ ↕ ○ ● □ ■ ▫ ▪ ▬ ⌂ ♪ ♫ ☺ ☻ ♀ ♂ ☼ ♠ ♣ ♥ ♦ >.join;
-    my $mes2    = < ∀ ∃ ∧ ∨ ⊕ ⊗ ∩ ∪ ⊂ ⊃ ∈ ∉ 〈 〉 >.join;
-    my $uni1    = < ˥ ˦ ˧ ˨ ˩ ⅓ ⅔ ⅕ ⅖ ⅗ ⅘ ⅙ ⅚ ✔ ✘ >.join;
-    my $all     = ($latin1, $cp1252, $w1g, $wgl4, $mes2, $uni1).join;
-    my @glyphs  = $all.comb.rotor(27, :partial).map(*.join);
+    my $latin1   = < « » ¥ £ ¢ ¤ ¡ ¿ µ ¶ § © ® ° × ÷ ± · ¼ ½ ¾ >.join;
+    my $cp1252   = < ‰ † ‡ ™ • … ‹ › € ƒ ‘ ’ “ ” ‚ „ >.join;
+    my $w1g      = < ′ ″ ∂ ∆ ∑ ∏ ∫ √ ⅛ ⅜ ⅝ ⅞ ≤ ≥ ≠ ≈ ∞ >.join;
+    my $wgl4     = < ↔ ↕ ○ ● □ ■ ▫ ▪ ▬ ⌂ ♪ ♫ ☺ ☻ ♀ ♂ ☼ >.join;
+    my $mes2     = < ∧ ∨ ⊕ ⊗ ∩ ∪ ⊂ ⊃ ∈ ∉ ∀ ∃ 〈 〉 >.join;
+    my $uni1     = < ˥ ˦ ˧ ˨ ˩ ‼ ‽ ✔ ✘ ⅓ ⅔ ⅕ ⅖ ⅗ ⅘ ⅙ ⅚ >.join;
+    my $uni1wide = "⁂ ※ ";
+    my $all      = ($latin1, $cp1252, $w1g, $wgl4, $mes2, $uni1, $uni1wide).join;
+    my @glyphs   = $all.comb.rotor(27, :partial).map(*.join);
 
     # Superscripts and subscripts
     my $sub      = (flat  'ₙ',          (0x2080 .. 0x208E).map(&chr)).join;
