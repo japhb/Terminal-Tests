@@ -47,8 +47,8 @@ sub MAIN(
     my @glyphs  = $all.comb.rotor(27, :partial).map(*.join);
 
     # Superscripts and subscripts
-    my $sub     = (0x2080 .. 0x208E).map(&chr).join;
-    my $super   = (flat < ⁰ ¹ ² ³ >, (0x2074 .. 0x207E).map(&chr)).join;
+    my $sub      = (flat  'ₙ',          (0x2080 .. 0x208E).map(&chr)).join;
+    my $super    = (flat < ⁿ ⁰ ¹ ² ³ >, (0x2074 .. 0x207E).map(&chr)).join;
 
     # Game piece glyphs
     my $suits    = < ♠ ♣ ♥ ♦ ♤ ♧ ♡ ♢ >.join;                         # WGL4, Unicode 1.1
@@ -164,8 +164,8 @@ sub MAIN(
     my @top     = ^4 .map: { @attrs[$_] ~ @colors[$_] ~ ' ' ~ @glyphs[$_] };
     my @rows    = |@top, '',
                   |(@vertical Z~ (|@games, '', |(@blocks Z~
-                                                 ('  ' ~ $sub   ~ ' ' ~ @arrows[0],
-                                                  '  ' ~ $super ~ ' ' ~ @arrows[1])),
+                                                 (' ' ~ $sub   ~ ' ' ~ @arrows[0],
+                                                  ' ' ~ $super ~ ' ' ~ @arrows[1])),
                                   |(@boxes Z~ @compasses))),
                   |((|@patterns, ' ' x 46) Z~ @sub-cells),
                   $faces, $flags, $people;
