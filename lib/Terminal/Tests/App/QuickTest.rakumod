@@ -74,8 +74,8 @@ sub MAIN(
     my $l-hbars  = '▉▊▋▌▍▎▏';
     my $r-hbars  = '▕🮇🮈▐🮉🮊🮋';
     my $h-lines  = '▔🭶🭷🭸🭹🭺🭻▁';
-    my $v-lines  = '▏🭰🭱🭲🭳🭴🭵▕';          # Doesn't display well horizontally
-    my @vertical = < ▏ 🭰 🭱 🭲 🭳 🭴 🭵 ▕ >;  # Same set, broken into 8 lines
+    my $v-lines  = '▏🭰🭱🭲🭳🭴🭵▕';           # Doesn't display well horizontally
+    my @vertical = < ▏ 🭰 🭱 🭲 🭳 🭴 🭵 ▕ >;  # Same set, broken into 8 rows
     my $checker  = '▀▄ 🙿  🮕🮕';
     my $shades   = '██▓▓▒▒░░';
     my $squares  = '◧◨◩◪⬒⬓⬕⬔';
