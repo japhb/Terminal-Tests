@@ -1,7 +1,11 @@
 Revision history for Terminal-Tests
 
 {{$NEXT}}
-  - Update screenshot for macOS iTerm2
+  [Features]
+  - Greatly expand terminal feature tests in terminal-quick-test pattern
+
+  [Packaging]
+  - Add dependency on Terminal::Capabilities to autodetect terminal caps
 
 
 0.0.5  2025-05-30T17:56:32-07:00

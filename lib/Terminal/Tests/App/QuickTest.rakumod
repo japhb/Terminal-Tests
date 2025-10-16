@@ -1,16 +1,57 @@
 # ABSTRACT: Output quick single-page terminal test pattern
 
 use Terminal::ANSIColor;
+use Terminal::Capabilities;
+use Terminal::Capabilities::Autodetect;
 use Text::MiscUtils::Layout;
+
+
+sub summarize-autodetection() {
+    my ($caps, $terminal, $version) = terminal-env-detect;
+
+    my $draw  = (('V' if $caps.vt100-boxes),
+                 ('H' if $caps.half-blocks),
+                 ('Q' if $caps.quadrants),
+                 ('S' if $caps.sextants),
+                 ('O' if $caps.octants),
+                 ('q' if $caps.sep-quadrants),
+                 ('s' if $caps.sep-sextants),
+                 ('o' if $caps.braille)).join;
+
+    my $rgb   = colored('R', '255,0,0')
+              ~ colored('G', '0,255,0')
+              ~ colored('B', '100,100,255');
+    my $color = $caps.color24bit ??  $rgb  !!
+                $caps.color8bit  ??  '256' !!
+                $caps.color3bit  ??  'VT'  !! '';
+    $color    = colored('B', 'bold white') ~ $color if $caps.colorbright;
+
+    my $attrs = ((colored('B', 'bold')      if $caps.bold),
+                 (colored('I', 'italic')    if $caps.italic),
+                 (colored('I', 'inverse')   if $caps.inverse),
+                 (colored('U', 'underline') if $caps.underline)).join;
+
+    my $summary = $version ?? "$terminal $version" !! $terminal;
+    $summary ~= '; symbols:' ~ $caps.symbol-set;
+    $summary ~= " attrs:$attrs" if $attrs;
+    $summary ~= " color:$color" if $color;
+    $summary ~= " drawing:$draw" if $draw;
+
+
+    colored('Detected:', 'bold yellow') ~ ' ' ~ $summary
+}
 
 
 #| Print a simple baseline terminal test
 sub MAIN(
     Bool:D :$ruler = False  #= Show a screen width ruler also
 ) is export {
+    # Autodetection using Terminal::Capabilities::Autodetect
+    my $summary = summarize-autodetection;
+
     # Simple ANSI attributes
-    my @basic  = < bold italic inverse underline >;
-    my @attrs  = @basic.map: { colored($_, $_) ~ (' ' x 10 - .chars) };
+    my @basic   = < bold italic inverse underline >;
+    my @attrs   = @basic.map: { colored($_, $_) ~ (' ' x 10 - .chars) };
 
     # 4-bit palette colors
     my @palette = < black red green yellow blue magenta cyan white >;
@@ -163,7 +204,7 @@ sub MAIN(
 
     # Combined output
     my @top     = ^4 .map: { @attrs[$_] ~ @colors[$_] ~ ' ' ~ @glyphs[$_] };
-    my @rows    = |@top, '',
+    my @rows    = $summary, '', |@top, '',
                   |(@vertical Z~ (|@games, '', |(@blocks Z~
                                                  (' ' ~ $sub   ~ ' ' ~ @arrows[0],
                                                   ' ' ~ $super ~ ' ' ~ @arrows[1])),
