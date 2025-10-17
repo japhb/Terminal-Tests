@@ -1,6 +1,8 @@
 Revision history for Terminal-Tests
 
 {{$NEXT}}
+
+0.0.7  2025-10-16T22:49:29-07:00
   [Bug fix]
   - Reduce width of autodetection summary string to avoid line wrapping
 
