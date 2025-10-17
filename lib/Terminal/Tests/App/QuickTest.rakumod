@@ -31,11 +31,12 @@ sub summarize-autodetection() {
                  (colored('I', 'inverse')   if $caps.inverse),
                  (colored('U', 'underline') if $caps.underline)).join;
 
-    my $summary = $version ?? "$terminal $version" !! $terminal;
-    $summary ~= '; symbols:' ~ $caps.symbol-set;
-    $summary ~= " attrs:$attrs" if $attrs;
-    $summary ~= " color:$color" if $color;
-    $summary ~= " drawing:$draw" if $draw;
+    my $summary = $version && !$terminal.contains('/')
+                  ?? "$terminal/$version" !! $terminal;
+    $summary ~= ' S:' ~ $caps.symbol-set;
+    $summary ~= " A:$attrs" if $attrs;
+    $summary ~= " C:$color" if $color;
+    $summary ~= " D:$draw"  if $draw;
 
 
     colored('Detected:', 'bold yellow') ~ ' ' ~ $summary

@@ -1,6 +1,12 @@
 Revision history for Terminal-Tests
 
 {{$NEXT}}
+  [Bug fix]
+  - Reduce width of autodetection summary string to avoid line wrapping
+
+  [Packaging]
+  - Bump Terminal::Capabilities dependency to 0.0.11+ to pick up bug fixes
+
 
 0.0.6  2025-10-16T00:35:12-07:00
   [Features]
