@@ -231,7 +231,7 @@ To use a different font, you can set Ghostty's C<font-family>, either in the
 config file (C<~/.config/ghostty/config> on Linux) or directly using a
 command-line option to C<ghostty>:
 
-    C<ghostty --font-family="DejaVu Sans Mono">
+    ghostty --font-family="DejaVu Sans Mono"
 
 
 =head1 AUTHOR

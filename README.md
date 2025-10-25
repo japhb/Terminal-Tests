@@ -138,7 +138,7 @@ For best results change Ghostty's base font; the default used in 1.2.x produces 
 
 To use a different font, you can set Ghostty's `font-family`, either in the config file (`~/.config/ghostty/config` on Linux) or directly using a command-line option to `ghostty`:
 
-    C<ghostty --font-family="DejaVu Sans Mono">
+    ghostty --font-family="DejaVu Sans Mono"
 
 AUTHOR
 ======
