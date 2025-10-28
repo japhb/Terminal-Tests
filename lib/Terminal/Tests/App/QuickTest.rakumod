@@ -150,6 +150,10 @@ sub MAIN(
                     '  ' ~ $sextants  ~ 'S' ~ $sep-sexts,
                     '  ' ~ $octants   ~ 'O' ~ $sep-octs;
 
+    # Programming ligatures (ASCII symbolic digraphs/trigraphs drawn as wide glyphs)
+    # Extras:  :: ?? && || //
+    my $prog = « -> --> => ==> == === != !== := =:= <= >= /* */ ».join(' ');
+
     # Text and color emoji
     sub textify($char) { $char ~ "\x[FE0E]"  }
     sub emojify($char) { $char ~ "\x[FE0F]"  }
@@ -210,7 +214,7 @@ sub MAIN(
                                                  (' ' ~ $sub   ~ ' ' ~ @arrows[0],
                                                   ' ' ~ $super ~ ' ' ~ @arrows[1])),
                                   |(@boxes Z~ @compasses))),
-                  |((|@patterns, ' ' x 46) Z~ @sub-cells),
+                  |((|@patterns, $prog) Z~ @sub-cells),
                   $faces, $flags, $people;
 
     .say for @rows;
