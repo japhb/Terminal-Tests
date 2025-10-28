@@ -1,6 +1,15 @@
 Revision history for Terminal-Tests
 
 {{$NEXT}}
+  [Features]
+  - Add a section in the quick-test pattern for programming ligatures
+    (ASCII symbolic digraphs and trigraphs displayed as single wide glyphs)
+
+  [Docs]
+  - Update screenshots again for the updated quick-test pattern
+  - Update README to mention programming ligatures
+  - Remove old unused Linux screenshots
+
 
 0.0.8  2025-10-24T21:48:46-07:00
   [Docs]
