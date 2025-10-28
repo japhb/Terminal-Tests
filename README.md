@@ -76,7 +76,7 @@ Notice how glyph sizes become inconsistent, several glyphs (including most of th
 
 As font problems go, this is pretty minor however.  There's even a benefit: this is the first screenshot that shows programming ligatures working (see the row of glyphs just above the emoji faces).
 
-For a whole different scale of font problems, consider `xterm` for example. By default on my Linux system if you just run `xterm`, it will use a low-res `bitmap` "fixed" font with approximately Unicode 3.0 support:
+For a whole different scale of font problems, consider `xterm` for example. By default on my Linux system if you just run `xterm`, it will use a low-res **bitmap** "fixed" font with approximately Unicode 3.0 support:
 
 ![Screenshot of quick test running on xterm using the Unicode fixed font](docs/images/quick-test-xterm-fixed-unicode-ruler.png)
 

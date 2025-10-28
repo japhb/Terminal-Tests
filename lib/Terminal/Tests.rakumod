@@ -135,7 +135,7 @@ row of glyphs just above the emoji faces).
 
 For a whole different scale of font problems, consider C<xterm> for example.
 By default on my Linux system if you just run C<xterm>, it will use a low-res
-C<bitmap> "fixed" font with approximately Unicode 3.0 support:
+B<bitmap> "fixed" font with approximately Unicode 3.0 support:
 
 L<Screenshot of quick test running on xterm using the Unicode fixed font|docs/images/quick-test-xterm-fixed-unicode-ruler.png>
 
