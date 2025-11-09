@@ -166,16 +166,17 @@ L<Screenshot of quick test running on xterm using the mono scalable font at 12-p
 
 =head3 Non-UTF-8 Configurations
 
-Windows Terminal in Windows 10 can produce a relatively decent result aside
-from the emoji rows, but B<only> if "beta" UTF-8 support is turned on (see
-separate L<#Windows 10 Terminal> section below).  Without that, the test
-pattern will absolutely fall apart:
+Windows Terminal in Windows 10/11 can produce a relatively decent Unicode
+7.0-compliant result aside from the emoji rows, but B<only> if "beta" UTF-8
+support is turned on (see separate L<#Windows Terminal> section below).
+Without that, the test pattern will absolutely fall apart as encoding garbage
+completely overwhelms everything:
 
-L<Screenshot of quick test on Windows Terminal in UTF-16 mode|docs/images/quick-test-windows-terminal-default.png>
+L<Screenshot of quick test on Windows Terminal in UTF-16 mode|docs/images/quick-test-windows-terminal-default-ruler.jpeg>
 
-That screenshot is actually from a much earlier version of the quick-test
-pattern, but the encoding garbage completely overwhelms everything anyway, so
-it's a bit of a moot point.
+Here's what it looks like in UTF-8 mode:
+
+L<Screenshot of quick test on Windows Terminal in UTF-8 mode|docs/images/quick-test-windows-terminal-utf8-powershell-ruler.png>
 
 
 =head3 OS and Terminal Versions
@@ -211,9 +212,9 @@ option) after you have rated the last test pattern.
 
 =head2 Terminal-Specific Recommended Tweaks
 
-=head3 Windows 10 Terminal
+=head3 Windows Terminal
 
-By default Windows Terminal under Windows 10 supports only UTF-16, an old
+By default Windows Terminal under Windows 10/11 supports only UTF-16, an old
 Unicode encoding that has otherwise been replaced by the UTF-8 encoding.
 You'll need to change the settings for Windows Terminal to use UTF-8 instead.
 (Backwards compatibility with ancient software is certainly a thing, but modern

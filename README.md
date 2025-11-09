@@ -74,7 +74,7 @@ I specified the `font-family` for Ghostty above because the default font for Gho
 
 Notice how glyph sizes become inconsistent, several glyphs (including most of the vulgar fractions and arrows) overlap each other, the heart card suit and white chess pawn look different than their fellows, and so on.
 
-As font problems go, this is pretty minor however.  There's even a benefit: this is the first screenshot that shows programming ligatures working (see the row of glyphs just above the emoji faces).
+As font problems go, this is pretty minor however. There's even a benefit: this is the first screenshot that shows programming ligatures working (see the row of glyphs just above the emoji faces).
 
 For a whole different scale of font problems, consider `xterm` for example. By default on my Linux system if you just run `xterm`, it will use a low-res **bitmap** "fixed" font with approximately Unicode 3.0 support:
 
@@ -98,11 +98,13 @@ Unsurprisingly the scalable font scales up better too (using `xterm -fa mono -fs
 
 ### Non-UTF-8 Configurations
 
-Windows Terminal in Windows 10 can produce a relatively decent result aside from the emoji rows, but **only** if "beta" UTF-8 support is turned on (see separate [Windows 10 Terminal](#windows-10-terminal) section below). Without that, the test pattern will absolutely fall apart:
+Windows Terminal in Windows 10/11 can produce a relatively decent Unicode 7.0-compliant result aside from the emoji rows, but **only** if "beta" UTF-8 support is turned on (see separate [Windows Terminal](#Windows Terminal) section below). Without that, the test pattern will absolutely fall apart as encoding garbage completely overwhelms everything:
 
-![Screenshot of quick test on Windows Terminal in UTF-16 mode](docs/images/quick-test-windows-terminal-default.png)
+![Screenshot of quick test on Windows Terminal in UTF-16 mode](docs/images/quick-test-windows-terminal-default-ruler.jpeg)
 
-That screenshot is actually from a much earlier version of the quick-test pattern, but the encoding garbage completely overwhelms everything anyway, so it's a bit of a moot point.
+Here's what it looks like in UTF-8 mode:
+
+![Screenshot of quick test on Windows Terminal in UTF-8 mode](docs/images/quick-test-windows-terminal-utf8-powershell-ruler.png)
 
 ### OS and Terminal Versions
 
@@ -128,9 +130,9 @@ The `terminal-test` program includes a far more complete set of test patterns ac
 Terminal-Specific Recommended Tweaks
 ------------------------------------
 
-### Windows 10 Terminal
+### Windows Terminal
 
-By default Windows Terminal under Windows 10 supports only UTF-16, an old Unicode encoding that has otherwise been replaced by the UTF-8 encoding. You'll need to change the settings for Windows Terminal to use UTF-8 instead. (Backwards compatibility with ancient software is certainly a thing, but modern terminal-interface software doesn't really speak anything but UTF-8 anymore.)
+By default Windows Terminal under Windows 10/11 supports only UTF-16, an old Unicode encoding that has otherwise been replaced by the UTF-8 encoding. You'll need to change the settings for Windows Terminal to use UTF-8 instead. (Backwards compatibility with ancient software is certainly a thing, but modern terminal-interface software doesn't really speak anything but UTF-8 anymore.)
 
 I used to point to online instructions for this, but unfortunately they have disappeared and the Wayback Machine did not archive them. Please contact me if you have replacement instructions.
 
