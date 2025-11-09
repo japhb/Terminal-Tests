@@ -98,7 +98,7 @@ Unsurprisingly the scalable font scales up better too (using `xterm -fa mono -fs
 
 ### Non-UTF-8 Configurations
 
-Windows Terminal in Windows 10/11 can produce a relatively decent Unicode 7.0-compliant result aside from the emoji rows, but **only** if "beta" UTF-8 support is turned on (see separate [Windows Terminal](#Windows Terminal) section below). Without that, the test pattern will absolutely fall apart as encoding garbage completely overwhelms everything:
+Windows Terminal in Windows 10/11 can produce a relatively decent Unicode 7.0-compliant result aside from the emoji rows, but **only** if "beta" UTF-8 support is turned on (see separate [Windows Terminal](#windows-terminal) section below). Without that, the test pattern will absolutely fall apart as encoding garbage completely overwhelms everything:
 
 ![Screenshot of quick test on Windows Terminal in UTF-16 mode](docs/images/quick-test-windows-terminal-default-ruler.jpeg)
 
