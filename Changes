@@ -3,6 +3,7 @@ Revision history for Terminal-Tests
 {{$NEXT}}
   [Docs]
   - Update Windows Terminal screenshots (sapeurfaire++)
+  - Add README section for setting UTF-8 mode for Windows Terminal (sapeurfaire++)
 
   [Packaging]
   - Bump T::C dependency to 0.0.13+ for Windows Terminal autodetection

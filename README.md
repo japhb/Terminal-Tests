@@ -134,7 +134,31 @@ Terminal-Specific Recommended Tweaks
 
 By default Windows Terminal under Windows 10/11 supports only UTF-16, an old Unicode encoding that has otherwise been replaced by the UTF-8 encoding. You'll need to change the settings for Windows Terminal to use UTF-8 instead. (Backwards compatibility with ancient software is certainly a thing, but modern terminal-interface software doesn't really speak anything but UTF-8 anymore.)
 
-I used to point to online instructions for this, but unfortunately they have disappeared and the Wayback Machine did not archive them. Please contact me if you have replacement instructions.
+Thanks to [sapeurfaire](https://github.com/sapeurfaire)++, we now have instructions to change this setting either temporarily or permanently.
+
+If you would like to change to UTF-8 **just for PowerShell**, you can simply tell it to use Code Page 65001 (Microsoft naming for UTF-8) -- either when running it manually or as part of the command that Windows Terminal launches for your PowerShell profile -- by adding the following options to the PowerShell command line:
+
+`-NoExit -Command "chcp 65001"`
+
+If you'd like to switch to UTF-8 for **ALL** terminal applications, you can follow this path in the system settings:
+
+Settings --> Time & language --> Language & region --> Administrative language settings --> Change system locale
+
+You should see this window:
+
+![Screenshot of Windows Region Settings dialog](docs/images/Windows-Region-Settings-Beta-UTF-8.png)
+
+Select the "Beta: Use Unicode UTF-8 for worldwide language support" checkbox. You will then need to restart your computer so the change can take effect:
+
+![Screenshot of Change System Locale restart dialog](docs/images/Windows-Region-Settings-Restart-Needed.png)
+
+If you prefer to make such changes via script rather than dialog boxes, you can use this PowerShell script to elevate privileges and edit the registry for you:
+
+[PowerShell UTF-8 registry editing script](https://gist.github.com/sapeurfaire/8e0a9518a89f0bde064c4d49afd09f5f)
+
+For best Unicode and emoji handling, you will also want to set the Windows Terminal Compatibility setting for Text measurement mode to "Grapheme clusters":
+
+![Screenshot of Windows Terminal Compatibility settings dialog](docs/images/Windows-Terminal-Settings-Grapheme-clusters.png)
 
 ### Ghostty 1.2.x
 
