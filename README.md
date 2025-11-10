@@ -162,7 +162,7 @@ For best Unicode and emoji handling, you will also want to set the Windows Termi
 
 ### Ghostty 1.2.x
 
-For best results change Ghostty's base font; the default used in 1.2.x produces numerous artifacts. DejaVu Sans Mono seems to work well on Linux; if you're on a Mac or Windows box you may need to either install that font family or find another mostly-complete monospace font family instead instead.
+For best results change Ghostty's base font; the default used in 1.2.x produces numerous artifacts. DejaVu Sans Mono seems to work well on Linux; if you're on a Mac or Windows box you may need to either install that font family or find another mostly-complete monospace font family instead.
 
 To use a different font, you can set Ghostty's `font-family`, either in the config file (`~/.config/ghostty/config` on Linux) or directly using a command-line option to `ghostty`:
 
