@@ -1,6 +1,9 @@
 Revision history for Terminal-Tests
 
 {{$NEXT}}
+  [Docs]
+  - Note in README that VTE emoji problems are due to be addressed in VTE 0.84
+
 
 0.0.10  2025-11-09T18:20:03-08:00
   [Docs]

@@ -63,7 +63,9 @@ Likewise, flags for ISO country codes are unsupported, while oddly region-coded
 flags are, and joined emoji (using ZWJ, the Zero-Width Joiner) don't actually
 join.  Furthermore several sets of "big pixel" drawing characters are
 unsupported and just show up as codepoint numbers, and the circled numbers in
-the ruler are drawn double-width.
+the ruler are drawn double-width.  (The VTE team expects to have the emoji
+problems fixed in VTE 0.84, but that will take some time to be released and
+work its way through the various distro package pipelines.)
 
 On the plus side, C<gnome-terminal> correctly shows the bright bar in the 3-bit
 color bars section in the upper left, doesn't stretch the outlined corner
