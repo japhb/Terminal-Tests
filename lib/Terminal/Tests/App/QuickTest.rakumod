@@ -51,15 +51,19 @@ sub MAIN(
     my $summary = summarize-autodetection;
 
     # Simple ANSI attributes
-    my @basic   = < bold italic inverse underline >;
-    my @attrs   = @basic.map: { colored($_, $_) ~ (' ' x 10 - .chars) };
+    my @basic   = < bold faint italic inverse >;
+    my @lines   = < dunderline underline overline strike >;
+    my @attrs   = (@basic Z @lines).map: -> ($b, $l) {
+                      my $pad = ' ' x (16 - "$b$l".chars);
+                      colored($b, $b) ~ $pad ~ colored($l, $l) ~ '  '
+                  };
 
     # 4-bit palette colors
     my @palette = < black red green yellow blue magenta cyan white >;
-    my $regular = @palette.map({ colored '██', $_ }).join;
-    my $reg-bg  = @palette.map({ colored '██', "inverse on_$_" }).join;
-    my $bold    = @palette.map({ colored '██', "bold $_" }).join;
-    my $bold-bg = @palette.map({ colored '██', "bold inverse on_$_" }).join;
+    my $regular = @palette.map({ colored '█', $_ }).join;
+    my $reg-bg  = @palette.map({ colored '█', "inverse on_$_" }).join;
+    my $bold    = @palette.map({ colored '█', "bold $_" }).join;
+    my $bold-bg = @palette.map({ colored '█', "bold inverse on_$_" }).join;
 
     # 8-bit greyscale
     my $grey    = (^24).map({ colored ' ', 'on_' ~ (232 + $_) }).join;
