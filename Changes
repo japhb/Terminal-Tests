@@ -4,6 +4,13 @@ Revision history for Terminal-Tests
   [Docs]
   - Note in README that VTE emoji problems are due to be addressed in VTE 0.84
 
+  [Features]
+  - Squeeze in quick-test section for four SGR attrs newly supported by T::C/T::AC
+
+  [Packaging]
+  - Bump T::C dependency to 0.0.14+ to pick up new SGR attribute support
+  - Bump T::AC dependency (coincidentally to the same value) for the same reason
+
 
 0.0.10  2025-11-09T18:20:03-08:00
   [Docs]

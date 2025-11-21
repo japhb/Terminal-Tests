@@ -26,10 +26,14 @@ sub summarize-autodetection() {
                 $caps.color3bit  ??  'VT'  !! '';
     $color    = colored('B', 'bold white') ~ $color if $caps.colorbright;
 
-    my $attrs = ((colored('B', 'bold')      if $caps.bold),
-                 (colored('I', 'italic')    if $caps.italic),
-                 (colored('I', 'inverse')   if $caps.inverse),
-                 (colored('U', 'underline') if $caps.underline)).join;
+    my $attrs = ((colored('B', 'bold')       if $caps.bold),
+                 (colored('F', 'faint')      if $caps.faint),
+                 (colored('I', 'italic')     if $caps.italic),
+                 (colored('I', 'inverse')    if $caps.inverse),
+                 (colored('O', 'overline')   if $caps.overline),
+                 (colored('S', 'strike')     if $caps.strike),
+                 (colored('U', 'underline')  if $caps.underline),
+                 (colored('D', 'dunderline') if $caps.dunderline)).join;
 
     my $summary = $version && !$terminal.contains('/')
                   ?? "$terminal/$version" !! $terminal;
