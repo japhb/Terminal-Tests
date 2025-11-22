@@ -114,33 +114,40 @@ sub show-intro() {
 ### COLOR TESTS
 
 sub show-basic-attributes() {
-    my @basic = < bold italic inverse underline >;
+    my @basic = < bold faint italic inverse strike overline underline dunderline >;
     my @rows  = @basic.map: { colored $_, $_ };
     my $desc  = qq:to/DESC/;
-        The words "bold", "italic", "inverse", and "underline", each on
-        a line by itself, and each displayed as self-described. In other
-        words, "bold" should appear bold (thicker), "italic" should appear
-        italic (slanted or in a proper italic font), and so on.
+        The words "bold", "faint", "italic", "inverse", "strike" (strikethrough),
+        "overline", "underline", and "dunderline" (double underline), each on
+        a line by itself, and each displayed as self-described. In other words,
+        "bold" should appear bold (thicker), "italic" should appear italic
+        (slanted, oblique, or in a proper italic font), and so on.
         DESC
     show('color', 'attributes', "Attributes", $desc, @rows);
 }
 
 sub show-four-bit-color() {
     my @colors = < black red green yellow blue magenta cyan white >;
-    my @fg     = @colors.map: { colored '██',         $_ };
-    my @bg     = @colors.map: { colored '  ', 'on_' ~ $_ };
-    my @rows   = @fg.join,
-                 @bg.join,
-                 @fg.map({ BOLD() ~ $_ }).join,
-                 @bg.map({ BOLD() ~ $_ }).join;
+    my @fg-reg = @colors.map: { colored '██',                 $_ };
+    my @bg-inv = @colors.map: { colored '██', 'inverse on_' ~ $_ };
+    my @bg-reg = @colors.map: { colored '  ',         'on_' ~ $_ };
+    my @fg-inv = @colors.map: { colored '  ', 'inverse '    ~ $_ };
+    my @rows   = @fg-reg.join,
+                 @bg-inv.join,
+                 @bg-reg.join,
+                 @fg-inv.join,
+                 @fg-reg.map({ BOLD() ~ $_ }).join,
+                 @bg-inv.map({ BOLD() ~ $_ }).join,
+                 @bg-reg.map({ BOLD() ~ $_ }).join,
+                 @fg-inv.map({ BOLD() ~ $_ }).join;
     my $desc   = qq:to/DESC/;
         Eight solid colored stripes, from left to right:
 
             {@colors.join(', ')}
 
-        There should be a lighter stripe across all colors
-        between half and three-quarters of the way down.  There
-        should be no gaps or faint lines within the stripes.
+        There should be two lighter stripes across all colors in the
+        bottom half, one just below the median and one at the very
+        bottom, and no gaps or faint lines within the stripes.
 
         NOTE: Some terminal themes will alter stripe colors.
         DESC
@@ -461,6 +468,9 @@ sub show-number-forms() {
           * Roman numeral uppercase: I-XII
           * Roman numeral lowercase: i-xii
           * Roman numeral larger numbers: L, C, D, M, l, c, d, m
+
+        All rows should be clear and readable, with no glyphs cut
+        off or shrunk to unreadability.
         DESC
     show('symbols', 'number-forms', "Number Forms", $desc, @rows);
 }
@@ -475,6 +485,9 @@ sub show-super-sub-digits() {
         capital letter X for position reference; each row has left to right:
 
           * digits: 0-9; plus, minus, equals; parenthesis: left, right
+
+        Superscripts and subscripts should be readable and have consistent
+        size and alignment throughout each row.
 
         If only the superscript 1, 2, 3 (and X's) appear this rates as 0,
         as these are inherited from Latin-1 instead of being new glyphs.
@@ -512,14 +525,17 @@ sub show-tone-bars() {
 sub show-basic-icons() {
     my @rows;
     @rows.push: < ✔ ✘ ‣ ⁂ >;
-    @rows.push: < ※ ‼ ‽ ‱ >;
+    @rows.push: < ‼ ‽ ‱ ※ >;
     @rows.push: < ‖ ‗ ‾ ‿ >;
     my $desc = q:to/DESC/;
         Three rows of icons and punctuation; from left to right on each row:
 
           * checkmark, ballot-x, triangle-bullet, asterism
-          * reference-mark, double-exclamation, interrobang, per-ten-thousand
+          * double-exclamation, interrobang, per-ten-thousand, reference-mark
           * double-vertical-bar, double-low-bar, overbar, undertie
+
+        All symbols should be narrow (one cell wide) except reference-mark
+        and asterism, which may be narrow or wide depending on your terminal.
         DESC
     show('symbols', 'basic', "Misc", $desc, @rows);
 }
@@ -595,8 +611,9 @@ sub show-chess-pieces() {
 
           * king, queen, rook, bishop, knight, pawn
 
-        Pieces should not be cut off or unreadable.  Spacing should be even,
-        with no extra-wide or extra-narrow gaps.
+        Pieces should not be cut off or unreadable.  Spacing should be
+        even, with no extra-wide or extra-narrow gaps, and all pieces
+        should match in general appearance.
         DESC
     show('games', 'chess', "Chess", $desc, @rows);
 }
@@ -642,7 +659,8 @@ sub show-mahjong-tiles() {
             seasons: spring, summer, autumn, winter; other: joker, back
 
         Tiles should not be cut off or unreadable.  Spacing should be even,
-        with no extra-wide or extra-narrow gaps.
+        with no extra-wide or extra-narrow gaps, and all pieces should be
+        the same size.
         DESC
     show('games', 'mahjong', "Mahjong", $desc, @rows);
 }
@@ -664,7 +682,9 @@ sub show-domino-tiles() {
           * vertical tiles:   4-0 to 6-6, back
 
         Tiles should not be cut off or unreadable.  Spacing should be even,
-        with no extra-wide or extra-narrow gaps.
+        with no extra-wide or extra-narrow gaps, all tiles should be the
+        same size, and the vertical tiles should appear centered below the
+        horizontal tiles above them.
         DESC
     show('games', 'dominoes', "Dominoes", $desc, @rows);
 }
@@ -687,7 +707,8 @@ sub show-playing-cards() {
           * card back; jokers: red, black, white
 
         Cards should not be cut off or unreadable.  Spacing should be even,
-        with no extra-wide or extra-narrow gaps.
+        with no extra-wide or extra-narrow gaps, and all cards should be
+        the same size.
         DESC
     show('games', 'playing-cards', "Playing Cards", $desc, @rows);
 }
@@ -701,8 +722,8 @@ sub show-playing-card-trumps() {
     @rows.push: (0x1F0EC .. 0x1F0EF).map(&chr);
     @rows.push: (0x1F0EA, 0x1F0EB, 0x1F0E1, 0x1F0F5, 0x1F0E0, 0x1F0F4).map(&chr);
     my $desc = q:to/DESC/;
-        Five rows of playing card trumps in text outline form; from left to
-        right on each row:
+        Five rows of playing card trumps in text outline form; from left to right
+        on each row:
 
           * ages: childhood, youth, maturity, old-age
           * seasons: spring, summer, autumn, winter
@@ -711,8 +732,8 @@ sub show-playing-card-trumps() {
           * pairs: earth-and-air, water-and-fire, individual, collective,
             the-fool, the-game
 
-        Cards should not be cut off or unreadable.  Spacing should be even,
-        with no extra-wide or extra-narrow gaps.
+        Cards should not be cut off or unreadable.  Spacing should be even, with
+        no extra-wide or extra-narrow gaps, and all cards should be the same size.
         DESC
     show('games', 'trump-cards', "Trump Cards", $desc, @rows);
 }
@@ -729,7 +750,8 @@ sub show-xiangqi-pieces() {
           * general, mandarin, elephant, horse, chariot, cannon, soldier
 
         Pieces should not be cut off or unreadable.  Spacing should be even,
-        with no extra-wide or extra-narrow gaps.
+        with no extra-wide or extra-narrow gaps, and all pieces should be
+        the same size.
         DESC
     show('games', 'xiangqi', "Xiangqi", $desc, @rows);
 }
@@ -797,6 +819,8 @@ sub show-facial-outlines() {
         outline form; from left to right:
 
           * {@faces.join(', ')}
+
+        The last face should end under the "n" in "Face Outlines".
         DESC
     show('emoji', 'face-outlines', "Face Outlines", $desc, [$row]);
 }
