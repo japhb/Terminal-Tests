@@ -1,6 +1,8 @@
 Revision history for Terminal-Tests
 
 {{$NEXT}}
+
+0.0.13  2026-01-25T22:24:21-08:00
   [Packaging]
   - Bump T::C dependency to 0.0.15+ to pick up several improvements, including
     Uni13/Uni16 symbol-set support and better autodetection
