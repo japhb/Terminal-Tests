@@ -90,9 +90,9 @@ sub MAIN(
     my $latin1   = < « » ¥ £ ¢ ¤ ¡ ¿ µ ¶ § © ® ° × ÷ ± · ¼ ½ ¾ >.join;
     my $cp1252   = < ‰ † ‡ ™ • … ‹ › € ƒ ‘ ’ “ ” ‚ „ >.join;
     my $w1g      = < ′ ″ ∂ ∆ ∑ ∏ ∫ √ ⅛ ⅜ ⅝ ⅞ ≤ ≥ ≠ ≈ ∞ >.join;
-    my $wgl4     = < ↔ ↕ ○ ● □ ■ ▫ ▪ ▬ ⌂ ♪ ♫ ☺ ☻ ♀ ♂ ☼ >.join;
+    my $wgl4     = < ↔ ↕ ○ ● □ ■ ▫ ▪ ▬ ⌂ ◊ ☺ ☻ ♀ ♂ ☼ >.join;
     my $mes2     = < ∧ ∨ ⊕ ⊗ ∩ ∪ ⊂ ⊃ ∈ ∉ ∀ ∃ 〈 〉 >.join;
-    my $uni1     = < ˥ ˦ ˧ ˨ ˩ ‼ ‽ ✔ ✘ ⅓ ⅔ ⅕ ⅖ ⅗ ⅘ ⅙ ⅚ >.join;
+    my $uni1     = < ˥ ˦ ˧ ˨ ˩ ‼ ‽ ✔ ✘ ‿ ⅓ ⅔ ⅕ ⅖ ⅗ ⅘ ⅙ ⅚ >.join;
     my $uni1wide = "⁂ ※ ";
     my $all      = ($latin1, $cp1252, $w1g, $wgl4, $mes2, $uni1, $uni1wide).join;
     my @glyphs   = $all.comb.rotor(27, :partial).map(*.join);
@@ -100,6 +100,17 @@ sub MAIN(
     # Superscripts and subscripts
     my $sub      = (flat  'ₙ',          (0x2080 .. 0x208E).map(&chr)).join;
     my $super    = (flat < ⁿ ⁰ ¹ ² ³ >, (0x2074 .. 0x207E).map(&chr)).join;
+
+    # Music
+    my $w-orig   = < ♩ ♪ ♫ ♬ ♭ ♮ ♯ >.join;     # WGL4R, WGL4, Unicode 1.1
+    my $w-rests  = < 𝄺 𝄻 𝄼 𝄽 𝄾 𝄿 𝅀 𝅁 𝅂 >.join ;  # Unicode 3.1
+    my $w-notes  = < 𝅜 𝅝 𝅗𝅥 𝅘𝅥 𝅘𝅥𝅮 𝅘𝅥𝅯 𝅘𝅥𝅰 𝅘𝅥𝅱 𝅘𝅥𝅲 >.join ; # Unicode 3.1
+    my $w-staves = < 𝄖 𝄗 𝄘 𝄙 𝄚 𝄛 >.join;    # Unicode 3.1
+    my $w-clefs  = < 𝄞 𝄡 𝄢 𝄥 𝄦 >.join;         # Unicode 3.1
+    my $w-dyn    = < 𝆏 𝆐 𝆑 𝆒 𝆓 >.join;         # Unicode 3.1
+    my $w-gliss  = < 𝆱 𝆲 >.join;              # Unicode 3.1
+    my $western  = ($w-orig, $w-rests, $w-notes, $w-staves,
+                    $w-clefs, $w-dyn, $w-gliss).join(' ');
 
     # Game piece glyphs
     my $suits    = < ♠ ♣ ♥ ♦ ♤ ♧ ♡ ♢ >.join;                         # WGL4, Unicode 1.1
@@ -218,9 +229,9 @@ sub MAIN(
     # Combined output
     my @top     = ^4 .map: { @attrs[$_] ~ @colors[$_] ~ ' ' ~ @glyphs[$_] };
     my @rows    = $summary, '', |@top, '',
-                  |(@vertical Z~ (|@games, '', |(@blocks Z~
-                                                 (' ' ~ $sub   ~ ' ' ~ @arrows[0],
-                                                  ' ' ~ $super ~ ' ' ~ @arrows[1])),
+                  |(@vertical Z~ (|@games, $western,
+                                  |(@blocks Z~ (' ' ~ $sub   ~ ' ' ~ @arrows[0],
+                                                ' ' ~ $super ~ ' ' ~ @arrows[1])),
                                   |(@boxes Z~ @compasses))),
                   |((|@patterns, $prog) Z~ @sub-cells),
                   $faces, $flags, $people;
