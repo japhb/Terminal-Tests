@@ -1,58 +1,17 @@
 # ABSTRACT: Output quick single-page terminal test pattern
 
 use Terminal::ANSIColor;
-use Terminal::Capabilities;
-use Terminal::Capabilities::Autodetect;
+use Terminal::Capabilities::Summarize;
 use Text::MiscUtils::Layout;
-
-
-sub summarize-autodetection() {
-    my ($caps, $terminal, $version) = terminal-env-detect;
-
-    my $draw  = (('V' if $caps.vt100-boxes),
-                 ('H' if $caps.half-blocks),
-                 ('Q' if $caps.quadrants),
-                 ('S' if $caps.sextants),
-                 ('O' if $caps.octants),
-                 ('q' if $caps.sep-quadrants),
-                 ('s' if $caps.sep-sextants),
-                 ('o' if $caps.braille)).join;
-
-    my $rgb   = colored('R', '255,0,0')
-              ~ colored('G', '0,255,0')
-              ~ colored('B', '100,100,255');
-    my $color = $caps.color24bit ??  $rgb  !!
-                $caps.color8bit  ??  '256' !!
-                $caps.color3bit  ??  'VT'  !! '';
-    $color    = colored('B', 'bold white') ~ $color if $caps.colorbright;
-
-    my $attrs = ((colored('B', 'bold')       if $caps.bold),
-                 (colored('F', 'faint')      if $caps.faint),
-                 (colored('I', 'italic')     if $caps.italic),
-                 (colored('I', 'inverse')    if $caps.inverse),
-                 (colored('O', 'overline')   if $caps.overline),
-                 (colored('S', 'strike')     if $caps.strike),
-                 (colored('U', 'underline')  if $caps.underline),
-                 (colored('D', 'dunderline') if $caps.dunderline)).join;
-
-    my $summary = $version && !$terminal.contains('/')
-                  ?? "$terminal/$version" !! $terminal;
-    $summary ~= ' S:' ~ $caps.symbol-set;
-    $summary ~= " A:$attrs" if $attrs;
-    $summary ~= " C:$color" if $color;
-    $summary ~= " D:$draw"  if $draw;
-
-
-    colored('Detected:', 'bold yellow') ~ ' ' ~ $summary
-}
 
 
 #| Print a simple baseline terminal test
 sub MAIN(
     Bool:D :$ruler = False  #= Show a screen width ruler also
 ) is export {
-    # Autodetection using Terminal::Capabilities::Autodetect
-    my $summary = summarize-autodetection;
+    # Autodetection using Terminal::Capabilities::Summarize
+    my ($caps, $terminal, $version, $summary) = summarize-autodetection;
+    $summary = colored('Detected:', 'bold yellow') ~ ' ' ~ $summary;
 
     # Simple ANSI attributes
     my @basic   = < bold faint italic inverse >;
