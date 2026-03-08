@@ -1,6 +1,12 @@
 Revision history for Terminal-Tests
 
 {{$NEXT}}
+  [Packaging]
+  - Bump T::C dependency to pick up unified summarize-autodetection
+
+  [Refactoring]
+  - Replace local summarize-autodetection code with upgraded T::C version
+
 
 0.0.14  2026-03-07T20:03:37-08:00
   [Features]
