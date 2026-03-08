@@ -1,6 +1,9 @@
 Revision history for Terminal-Tests
 
 {{$NEXT}}
+  [Packaging]
+  - Bump all dependencies to current versions
+
 
 0.0.13  2026-01-25T22:24:21-08:00
   [Packaging]
