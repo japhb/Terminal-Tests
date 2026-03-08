@@ -9,7 +9,7 @@
     "Hash::Ordered:ver<0.0.8+>:auth<zef:lizmat>",
     "JSON::Fast:ver<0.19+>:auth<cpan:TIMOTIMO>",
     "Terminal::ANSIColor:ver<0.14+>:auth<zef:raku-community-modules>",
-    "Terminal::Capabilities:ver<0.0.16+>:auth<zef:japhb>",
+    "Terminal::Capabilities:ver<0.0.17+>:auth<zef:japhb>",
     "Text::MiscUtils:ver<0.0.11+>:auth<zef:japhb>"
   ],
   "description": "Terminal emulator, multiplexer, and font quality tests",
