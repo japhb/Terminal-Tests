@@ -1,6 +1,8 @@
 Revision history for Terminal-Tests
 
 {{$NEXT}}
+
+0.0.14  2026-03-07T20:03:37-08:00
   [Features]
   - Add western music symbols row to terminal-quick-test
 
