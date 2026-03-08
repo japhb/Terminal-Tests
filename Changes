@@ -1,6 +1,9 @@
 Revision history for Terminal-Tests
 
 {{$NEXT}}
+  [Features]
+  - Add western music symbols row to terminal-quick-test
+
   [Packaging]
   - Bump all dependencies to current versions
 
