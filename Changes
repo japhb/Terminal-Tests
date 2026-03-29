@@ -1,6 +1,8 @@
 Revision history for Terminal-Tests
 
 {{$NEXT}}
+
+0.0.16  2026-03-28T22:21:26-07:00
   [Features]
   - Add a row of narrow+VS16 chars with and without space to show spacing quirk
 
