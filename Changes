@@ -1,6 +1,12 @@
 Revision history for Terminal-Tests
 
 {{$NEXT}}
+  [Features]
+  - Add a row of narrow+VS16 chars with and without space to show spacing quirk
+
+  [Packaging]
+  - Bump T::C dependency for narrow-emoji-needs-space quirk
+
 
 0.0.15  2026-03-08T14:28:02-07:00
   [Packaging]
