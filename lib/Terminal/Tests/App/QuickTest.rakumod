@@ -143,6 +143,11 @@ sub MAIN(
     my $tones   = @people.map(&toneify).join;
     my $faces   = ($texts, $emoji, $tones).join('  ');
 
+    # Narrow characters widened into emoji by VS16
+    my @narrow   = < © ® ™ ‼ ⁉ ℹ ↔ ⌨ >;
+    my $no-space = @narrow.map('(' ~ *.&emojify ~ ')').join;
+    my $spaced   = @narrow.map('(' ~ *.&emojify ~ ' )').join;
+
     # Emoji flags
     sub countrify($iso-code) {
         $iso-code.uc.comb.map({ chr(ord($_) + 0x1F1A5) }).join
@@ -193,6 +198,7 @@ sub MAIN(
                                                 ' ' ~ $super ~ ' ' ~ @arrows[1])),
                                   |(@boxes Z~ @compasses))),
                   |((|@patterns, $prog) Z~ @sub-cells),
+                  $no-space ~ ' - ' ~ $spaced,
                   $faces, $flags, $people;
 
     .say for @rows;
