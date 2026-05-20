@@ -1,6 +1,9 @@
 Revision history for Terminal-Tests
 
 {{$NEXT}}
+  [Packaging]
+  - Bump T::C dependency for CRT and Qt autodetection fixes
+
 
 0.0.17  2026-04-24T18:02:36-07:00
   [Packaging]
